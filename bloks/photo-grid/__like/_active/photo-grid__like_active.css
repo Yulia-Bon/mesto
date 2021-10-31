@@ -1,0 +1,7 @@
+/*что-то потом будет*/
+.photo-grid__like_active {
+  background-image: url(../../../../images/Like_aktiv.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+}
