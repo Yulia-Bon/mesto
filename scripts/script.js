@@ -1,22 +1,53 @@
-let popup = document.querySelector(".popup"); // Фон попап окна
-let popup__container = document.querySelector(".popup__container"); // Само окно
-let openPopupButtons = document.querySelectorAll(".profile__edit"); // Кнопки для показа окна
-let closePopupButton = document.querySelector(".popup__close"); // Кнопка для скрытия окна
+// кнопки Закрыть, Редактировать
+let closeButton = document.querySelector(".popup__close");
+let editButton = document.querySelector(".profile__edit");
+//  попап
+let popup = document.querySelector(".popup");
+//  формa
+let formElement = document.querySelector(".popup__container"); // Воспользуйтесь методом querySelector()
+// Находим поля формы в DOM
+let nameInput = document.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
+let jobInput = document.querySelector(".popup__input_type_job"); // Воспользуйтесь инструментом .querySelector()
+let profileName = document.querySelector(".profile__name");
+let profileJob = document.querySelector(".profile__job");
 
-openPopupButtons.forEach(foreachFunction);
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function formSubmitHandler(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
-closePopupButton.addEventListener("click", () => {
-  // Вешаем обработчик на крестик
-  popup.classList.remove("active"); // Убираем активный класс с фона
-  popup__container.classList.remove("active"); // И с окна
-});
+  // Получите значение полей jobInput и nameInput из свойства value
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
 
-function foreachFunction(button) {
-  button.addEventListener("click", openPopupEventListener);
+  // Закрываем попап
+  popupClose();
 }
 
-function openPopupEventListener(e) {
-  //e.preventDefault(); // Предотвращаем дефолтное поведение браузера
-  popup.classList.add("active"); // Добавляем класс 'active' для фона
-  popup__container.classList.add("active"); // И для самого окна
-} 
+function popupOpen() {
+  popup.classList.add("active");
+
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+
+function popupClose() {
+  popup.classList.remove("active");
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener("submit", formSubmitHandler);
+closeButton.addEventListener("click", popupClose);
+editButton.addEventListener("click", popupOpen);
+
+// Закрываем попап по нажатию Escape
+document.addEventListener("keydown", function (event) {
+  // проверяем открыт ли попап
+  if (popup.classList.contains("active")) {
+    const key = event.key; // const {key} = event; in ES6+
+    if (key === "Escape") {
+      popupClose();
+    }
+  }
+});

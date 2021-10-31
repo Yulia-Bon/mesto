@@ -1,37 +1,39 @@
 .popup__close {
   position: absolute;
-  bottom: 98%;
-  left: 98%;
-  max-width: 40.7px;
-  min-height: 40.7px;
+  top: -40px;
+  right: -40px;
+  width: 40.7px;
+  height: 40.7px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .popup__close:hover {
   opacity: 0.6;
 }
 
-@media screen and (max-width: 639px) {
+.popup__close:focus {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
   .popup__close {
-    top: 5px;
-    left: 325px;
-    background-color: #000;
-    border-radius: 50%;
+    width: 30.7px;
+    height: 30.7px;
   }
 }
 
 @media screen and (max-width: 424px) {
   .popup__close {
-    top: 5px;
-    left: 275px;
+    right: 0;
   }
 }
 
-@media screen and (max-width: 374px) {
+@media screen and (max-height: 450px) {
   .popup__close {
-    top: 5px;
-    left: 265px;
+    top: 0;
+    right: -50px;
   }
 }

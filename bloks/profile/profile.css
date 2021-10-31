@@ -2,7 +2,7 @@
   max-width: 882px;
   min-height: 120px;
   display: flex;
-  margin: 40px auto;
+  margin: 55px auto;
 }
 
 @media screen and (max-width: 1023px) {

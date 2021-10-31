@@ -7,6 +7,7 @@
   white-space: nowrap;
   overflow: hidden;
   align-self: end;
+  letter-spacing: 2px;
 }
 
 @media screen and (max-width: 600px) {
@@ -15,3 +16,4 @@
     line-height: 33px;
   }
 }
+/*в фигме хвостик буквы "у" интересным образом вылез за пределы блока в пространство между ячейками сетки*/
