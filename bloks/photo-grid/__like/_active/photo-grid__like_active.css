@@ -1,4 +1,5 @@
-/*что-то потом будет*/
+/*что-то потом будет.
+ в html удалила тк ЯП не пропускает такое имя класса*/
 .photo-grid__like_active {
   background-image: url(../../../../images/Like_aktiv.svg);
   background-repeat: no-repeat;
