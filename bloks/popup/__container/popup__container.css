@@ -28,10 +28,7 @@
 @media screen and (max-width: 374px) {
   .popup__container {
     max-width: 282px;
+    padding: 25px 22px 25px;
   }
 }
-.popup__container.active {
-  /* При добавлении класса 'active'*/
 
-  transition: 0.5s all;
-}

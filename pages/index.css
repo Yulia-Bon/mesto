@@ -1,4 +1,5 @@
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
 
 @import url(../bloks/pages/pages.css);
 
@@ -24,11 +25,14 @@
 @import url(../bloks/profile/__name/profile__name.css);
 
 @import url(../bloks/popup/popup.css);
-@import url(../bloks/popup/__close/__popup__close.css);
+@import url(../bloks/popup/__close/popup__close.css);
 @import url(../bloks/popup/__input/popup__input.css);
 @import url(../bloks/popup/__title/popup__title.css);
 @import url(../bloks/popup/__container/popup__container.css);
 @import url(../bloks/popup/__submit/popup__submit.css);
+@import url(../bloks/popup/__close-image/popup__close-image.css);
+@import url(../bloks/popup/_active/popup_active.css);
+
   
 
   

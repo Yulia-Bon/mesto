@@ -2,7 +2,7 @@
   max-width: 882px;
   min-height: 120px;
   display: flex;
-  margin: 55px auto;
+  margin: 41px auto;
 }
 
 @media screen and (max-width: 1023px) {
@@ -31,7 +31,7 @@
 @media screen and (max-width: 424px) {
   .profile {
     max-width: 382px;
-    margin: 40px 22px 0;
+    margin: 25px 22px 0;
   }
 }
 
