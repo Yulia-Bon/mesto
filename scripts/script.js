@@ -2,9 +2,9 @@
 let closeButton = document.querySelector(".popup__close");
 let editButton = document.querySelector(".profile__edit");
 //  попап
-let popup = document.querySelector(".popup__container");
+let popup = document.querySelector(".popup");
 //  формa
-let formElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
+let formElement = document.querySelector(".popup__container"); // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
 let nameInput = document.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = document.querySelector(".popup__input_type_job"); // Воспользуйтесь инструментом .querySelector()
