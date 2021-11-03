@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>место</title>
-    <meta
-      name="description"
-      content="интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки"
-    />
+    <meta name="description" content="интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки"/>
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="pages">
@@ -16,11 +13,7 @@
     </header>
     <main>
       <section class="profile">
-        <img
-          src="./images/avatar.jpg"
-          alt="Жак-Ив Кусто"
-          class="profile__avatar"
-        />
+        <img src="./images/avatar.jpg" alt="Фото в профиле" class="profile__avatar"/>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Исследователь океана</p>
@@ -32,64 +25,43 @@
       <section class="places">
         <ul class="photo-grid">
           <li class="photo-grid__item">
-            <img
-              src="./images/dombay.png"
-              alt="Домбай"
-              class="photo-grid__pic"
-            />
+            <img src="./images/dombay.jpg" alt="Домбай" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Домбай</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img src="./images/soci.jpg" alt="Сочи" class="photo-grid__pic" />
+            <img src="./images/soci.jpg" alt="Сочи" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Сочи</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
-            >
           </li>
 
           <li class="photo-grid__item">
-            <img
-              src="./images/berbabit.jpg"
-              alt="Бермамыт"
-              class="photo-grid__pic"
-            />
+            <img src="./images/berbabit.jpg" alt="Бермамыт" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Бермамыт</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img
-              src="./images/krasnodarski_krai.jpg"
-              alt="Краснодаский край"
-              class="photo-grid__pic"
-            />
+            <img src="./images/krasnodarski_krai.jpg" alt="Краснодаский край" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Краснодарский край</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img
-              src="./images/sulakski_canon.jpg"
-              alt="Сулакский каньон"
-              class="photo-grid__pic"
-            />
+            <img src="./images/sulakski_canon.jpg" alt="Сулакский каньон" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Сулакский каньон</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img
-              src="./images/ilbrus.jpg"
-              alt="Гора Эльбрус"
-              class="photo-grid__pic"
-            />
+            <img src="./images/ilbrus.jpg" alt="Гора Эльбрус" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Гора Эльбрус</h2>
               <button type="button" class="photo-grid__like">Нравится</button>
@@ -103,29 +75,13 @@
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
-      <form action="#" method="POST" class="popup__container">
+    <div class="popup__container">
+      <form action="#" method="POST" class="popup"> 
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input
-          type="text"
-          value="Жак-Ив Кусто"
-          placeholder="Ваше имя"
-          class="popup__input popup__input_type_name"
-        />
-        <input
-          type="text"
-          value="Исследователь океана"
-          placeholder="Чем занимаетесь?"
-          class="popup__input popup__input_type_job"
-        />
-        <input type="submit" value="Сохранить" class="popup__submit" />
-        <a href="#" class="popup__close" title="Закрыть"
-          ><!--не уверена, но мне кажется, что это целый элемент, хотя имя класса выглядит странно-->
-          <img
-            src="./images/Close_Icon.svg"
-            alt="Закрыть"
-            class="popup__close-image"
-        /></a>
+        <input name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup__input_type_name"/>
+        <input name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup__input_type_job"/>
+        <button class="popup__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
+        <button type="button" class="popup__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
     </div>
 

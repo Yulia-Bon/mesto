@@ -2,9 +2,9 @@
 let closeButton = document.querySelector(".popup__close");
 let editButton = document.querySelector(".profile__edit");
 //  попап
-let popup = document.querySelector(".popup");
+let popup = document.querySelector(".popup__container");
 //  формa
-let formElement = document.querySelector(".popup__container"); // Воспользуйтесь методом querySelector()
+let formElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
 let nameInput = document.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = document.querySelector(".popup__input_type_job"); // Воспользуйтесь инструментом .querySelector()
@@ -40,14 +40,3 @@ function popupClose() {
 formElement.addEventListener("submit", formSubmitHandler);
 closeButton.addEventListener("click", popupClose);
 editButton.addEventListener("click", popupOpen);
-
-// Закрываем попап по нажатию Escape
-document.addEventListener("keydown", function (event) {
-  // проверяем открыт ли попап
-  if (popup.classList.contains("popup_opened")) {
-    const key = event.key; // const {key} = event; in ES6+
-    if (key === "Escape") {
-      popupClose();
-    }
-  }
-});

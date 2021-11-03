@@ -5,11 +5,10 @@
   gap: 20px 17px;
   list-style: none;
   padding: 0;
-  margin: 51px 0 0;
-  line-height: 0;
+  margin: 48px 0 0;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 900px) {
   .photo-grid {
     grid-template-columns: repeat(2, calc(50% - 17px / 2));
     margin: 36px 30px auto;
