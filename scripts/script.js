@@ -25,14 +25,14 @@ function formSubmitHandler(evt) {
 }
 
 function popupOpen() {
-  popup.classList.add("popup_active");
+  popup.classList.add("popup_opened");
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
 function popupClose() {
-  popup.classList.remove("popup_active");
+  popup.classList.remove("popup_opened");
 }
 
 // Прикрепляем обработчик к форме:
@@ -44,7 +44,7 @@ editButton.addEventListener("click", popupOpen);
 // Закрываем попап по нажатию Escape
 document.addEventListener("keydown", function (event) {
   // проверяем открыт ли попап
-  if (popup.classList.contains("popup_active")) {
+  if (popup.classList.contains("popup_opened")) {
     const key = event.key; // const {key} = event; in ES6+
     if (key === "Escape") {
       popupClose();

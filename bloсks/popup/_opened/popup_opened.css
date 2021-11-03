@@ -1,4 +1,4 @@
-.popup_active {
+.popup_opened {
     /* При добавлении класса 'active'*/
     opacity: 1; /* Показываем фон и попап*/
     pointer-events: all; /* Возвращаем события*/
