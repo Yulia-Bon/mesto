@@ -86,6 +86,31 @@
       </form>
     </div>
    </section>
+
+   <section class="popup-photos">
+    <div class="popup-photos__container">
+      <form action="#" method="POST" class="popup-photos__form" name="popup-photos_info"> 
+        <h2 class="popup-photos__title">Новое место</h2>
+        <input name="name" type="text" value="" placeholder="Название" class="popup-photos__input popup-photos__input_type_card-name"/>
+        <input name="link" type="text" value="" placeholder="Ссылка на изображение " class="popup-photos__input popup-photos__input_type_card-src"/>
+        <button class="popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
+        <button type="button" class="popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
+      </form>
+    </div>
+   </section>
+
+   <template id="card-template">
+    <li class="card">
+      <button type="button" class="card__delete button"></button>
+      <div class="card__container">
+        <img src="" alt="" class="card__photo">
+      </div>
+      <h2 class="card__caption"></h2>
+      <button type="button" class="card__like button"></button>
+    </li>
+  </template>
+
     <script src="./scripts/script.js"></script>
   </body>
 </html>
+
