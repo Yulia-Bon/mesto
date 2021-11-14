@@ -95,8 +95,8 @@ function formSubmitHandlerPhoto(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
   // Получите значение полей jobInput и nameInput из свойства value
-  cardName.textContent = cardInput.value;
-  cardPhoto.textContent = srcInput.value;
+ // cardName.textContent = cardInput.value;
+  //cardPhoto.textContent = srcInput.value;
 
   // Закрываем попап
   popupClose();
