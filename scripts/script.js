@@ -1,5 +1,3 @@
-
-
 // ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
 const closeButton = document.querySelector(".popup__close");
 const editButton = document.querySelector(".profile__edit");
@@ -14,6 +12,8 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
+const title = document.querySelector('.photo-grid__title');
+const pic = document.querySelector(".photo-grid__pic");
 const photoContainer = document.querySelector('.photo-grid');
 const popupPhotos = document.querySelector(".popup-photos");
 const formElementPhotos = document.querySelector(".popup-photos__form");
@@ -50,56 +50,35 @@ const initialCards = [
   },
 ];
 
-function addPhoto(name, link) {
-  // function handleRemoveTodo(e) {
-  //     e.target.closest('.tasks__item').remove();
-  // }
-
-  const newPhoto = photoTemplate.content.querySelector('.photo-grid__item').cloneNode(true);
-  const photoSrc = newPhoto.querySelector('.photo-grid__pic');
-  const photoTitle = newPhoto.querySelector('.photo-grid__title');
-  //const cardRemoveButton = newTask.querySelector('.tasks__trash');
-
-  photoTitle.textContent = name;
-  photoSrc.src = link;
-
-  //cardRemoveButton.addEventListener('click', handleRemoveTodo);
-  //closeButton.addEventListener('click', popupClose);
-
-  return newPhoto;
-}
-
-initialCards.forEach(function(item) {
-  const newCard = addPhoto(item['name'], item['link']);
-  photoContainer.append(newCard);
-});
-
-// Обработчик «отправки» формы
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value; 
-
-    // Форма добавления фото
-    if (photoTitleInput.value && photoLinkInput.value) {
-      photoContainer.prepend(addPhoto(photoTitleInput.value, photoLinkInput.value));
-      // Очищаем поля
-      photoTitleInput.value = '';
-      photoLinkInput.value = '';
-    }
-
-    // Закрываем попап
-    popupClose();
-}
-
-formPhoto.addEventListener('submit', formSubmitHandler);
-
-
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
 const popupFullscreen = document.querySelector(".popup_type_fullscreen");
 const fullscreenImage = document.querySelector(".popup__fullscreen-image");
 const fullscreenText = document.querySelector(".popup__fullscreen-text");
+
+//Добавить разметку карточки
+const cardTemplate = document.querySelector('#photos-element').content;
+function addCard(src, name) {
+  const cardItem = cardTemplate.cloneNode(true);
+  cardItem.querySelector('.photo-grid__pic').src = src;
+  cardItem.querySelector('.photo-grid__pic').alt = name;
+  cardItem.querySelector('.photo-grid__title').textContent = name;
+  return cardItem;
+}
+
+
+
+//Вставить карточку в галерею
+const photoGallery = document.querySelector('.photo-grid');
+function insertCard(card) {
+  const photoCard = addCard(card.link, card.name);
+  photoGallery.prepend(photoCard);
+}
+//Вывести карточки на страницу
+initialCards.forEach(function(item) {
+  insertCard(item);
+});
+
+
 
 
 //ЛАЙК
@@ -107,9 +86,9 @@ const cardList = document.querySelector(".photo-grid");
 
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
+// Обработчик «отправки» формы, пока она никуда отправляться не будет
 function formSubmitHandler(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); //отменяет стандартную отправку формы.
 
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
@@ -161,44 +140,32 @@ function popupClosePhoto() {
 }
 
 
-
-// ФУНКЦИИ ГРУППЫ ФУЛЛСКРИН
-function openFullscreen(evt) {
-  const element = evt.target.closest(".photos__image");
-  fullscreenImage.src = element.src;
-  fullscreenText.textContent = element.alt;
-  openPopup(popupFullscreen);
-}
-
-const popupFullscreenOverlay = function (event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupFullscreen);
+//УДАЛИТЬ КАРТОЧКУ
+function deletePhoto(evt) {
+  if (!evt.target.matches('.photo-grid__delete-button')) {
+    return;
   }
-};
-const fullscreenCloseButton = document.querySelector(
-  ".popup__close_fullscreen"
-);
-
-// ФУНКЦИЯ СО СЛУШАТЕЛЯМИ
-function addEventListeners (element) {
-  element.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  element.querySelector('.element__like-button').addEventListener('click', likeCard);
-  element.querySelector('.element__image').addEventListener('click', openFullscreen);
+  else {
+    const cardToDelete = evt.target.closest('.photo-grid__item');
+    cardToDelete.remove();
+  }
 }
+cardList.addEventListener('click', deletePhoto);
+//Поменять класс
+function toggleModalWindow(popup) {
+  popup.classList.toggle('popup_opened');
+}
+
+
 
 
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
-formElementPhotos.addEventListener("submit", formSubmitHandlerPhoto);
+
 closeButtonPhoto.addEventListener("click", popupClosePhoto);
 addButton.addEventListener("click", popupOpenPhoto);
-
-fullscreenCloseButton.addEventListener("click", () =>
-  closePopup(popupFullscreen));
-popupFullscreen.addEventListener("click", popupFullscreenOverlay);
- 
 formElement.addEventListener("submit", formSubmitHandler);
 closeButton.addEventListener("click", popupClose);
 editButton.addEventListener("click", popupOpen);
-
 cardList.addEventListener("click", likePhoto);
+

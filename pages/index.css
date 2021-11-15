@@ -38,6 +38,7 @@
 @import url(../bloсks/popup-photos/__title/popup-photos__title.css);
 
 
+
 @import url(../bloсks/popup/popup.css);
 @import url(../bloсks/popup/__close/popup__close.css);
 @import url(../bloсks/popup/__input/popup__input.css);
@@ -45,3 +46,6 @@
 @import url(../bloсks/popup/__container/popup__container.css);
 @import url(../bloсks/popup/__submit/popup__submit.css);
 @import url(../bloсks/popup/_opened/popup_opened.css);
+@import url(../bloсks/popup/__fullscreen-container/popup__fullscreen-container.css);
+@import url(../bloсks/popup/__fullscreen-image/popup__fullscreen-image.css);
+@import url(../bloсks/popup/__fullscreen-text/popup__fullscreen-text.css);
