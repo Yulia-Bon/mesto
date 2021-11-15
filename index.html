@@ -24,50 +24,15 @@
 
       <section class="places">
         <ul class="photo-grid">
-          <li class="photo-grid__item">
+          <!--<li class="photo-grid__item">
             <img src="./images/dombay.jpg" alt="Домбай" class="photo-grid__pic"/>
             <div class="photo-grid__item-description">
               <h2 class="photo-grid__title">Домбай</h2>
               <button class="photo-grid__delete-button" aria-label="удалить фотографию"></button>
               <button type="button" class="photo-grid__like">Нравится</button>
             </div>
-          </li>
-          <li class="photo-grid__item">
-            <img src="./images/soci.jpg" alt="Сочи" class="photo-grid__pic"/>
-            <div class="photo-grid__item-description">
-              <h2 class="photo-grid__title">Сочи</h2>
-              <button type="button" class="photo-grid__like">Нравится</button>
-            </div>
-          </li>
-
-          <li class="photo-grid__item">
-            <img src="./images/berbabit.jpg" alt="Бермамыт" class="photo-grid__pic"/>
-            <div class="photo-grid__item-description">
-              <h2 class="photo-grid__title">Бермамыт</h2>
-              <button type="button" class="photo-grid__like">Нравится</button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img src="./images/krasnodarski_krai.jpg" alt="Краснодаский край" class="photo-grid__pic"/>
-            <div class="photo-grid__item-description">
-              <h2 class="photo-grid__title">Краснодарский край</h2>
-              <button type="button" class="photo-grid__like">Нравится</button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img src="./images/sulakski_canon.jpg" alt="Сулакский каньон" class="photo-grid__pic"/>
-            <div class="photo-grid__item-description">
-              <h2 class="photo-grid__title">Сулакский каньон</h2>
-              <button type="button" class="photo-grid__like">Нравится</button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img src="./images/ilbrus.jpg" alt="Гора Эльбрус" class="photo-grid__pic"/>
-            <div class="photo-grid__item-description">
-              <h2 class="photo-grid__title">Гора Эльбрус</h2>
-              <button type="button" class="photo-grid__like">Нравится</button>
-            </div>
-          </li>
+          </li> -->
+          
         </ul>
       </section>
     </main>
@@ -100,16 +65,28 @@
     </div>
    </section>
 
-   <template id="card-template">
-    <li class="card">
-      <button type="button" class="card__delete button"></button>
-      <div class="card__container">
-        <img src="" alt="" class="card__photo">
+   <section class="popup popup_type_fullscreen">
+    <div class="popup__fullscreen-container">
+      <img src="./images/CloseFull.svg" alt="Кнопка закрытия модального окна"
+        class="popup__close popup__close_element popup__close_fullscreen">
+      <img src="#" alt="Фотография на весь экран" class="popup__fullscreen-image">
+      <p class="popup__fullscreen-text"></p>
+    </div>
+  </section>
+
+
+   <template id="photos-element">
+    <li class="photo-grid__item">
+      <img src="./images/dombay.jpg" alt="Домбай" class="photo-grid__pic"/>
+      <div class="photo-grid__item-description">
+        <h2 class="photo-grid__title">Домбай</h2>
+        <button class="photo-grid__delete-button" aria-label="удалить фотографию"></button>
+        <button type="button" class="photo-grid__like">Нравится</button>
       </div>
-      <h2 class="card__caption"></h2>
-      <button type="button" class="card__like button"></button>
     </li>
   </template>
+
+
 
     <script src="./scripts/script.js"></script>
   </body>
