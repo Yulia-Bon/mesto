@@ -1,4 +1,4 @@
-.popup__close {
+.popup-user__close {
   position: absolute;
   top: -46px;
   right: -40px;
@@ -13,23 +13,23 @@
   background-size: 100%;
 }
 
-.popup__close:hover {
+.popup-user__close:hover {
   opacity: 0.6;
 }
 
-.popup__close:focus {
+.popup-user__close:focus {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 767px) {
-  .popup__close {
+  .popup-user__close {
     width: 25px;
     height: 25px;
   }
 }
 
 @media screen and (max-width: 424px) {
-  .popup__close {
+  .popup-user__close {
     right: -4px;
     top: -40px;
   }

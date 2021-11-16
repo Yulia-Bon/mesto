@@ -1,4 +1,4 @@
-.popup__submit {
+.popup-user__submit {
   max-width: 358px;
   width: 100%;
   min-height: 50px;
@@ -14,13 +14,13 @@
   transition: 0.2s ease;
 }
 @media screen and (max-width: 374px) {
-  .popup__submit {
+  .popup-user__submit {
     font-size: 14px;
     line-height: 17px;
     margin: 45 0 25px;
   }
 }
-.popup__submit:hover {
+.popup-user__submit:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 

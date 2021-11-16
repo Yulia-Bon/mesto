@@ -1,13 +1,13 @@
 // ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
-const closeButton = document.querySelector(".popup__close");
+const closeButton = document.querySelector(".popup-user__close");
 const editButton = document.querySelector(".profile__edit");
 //  попап
-const popup = document.querySelector(".popup");
+const popup = document.querySelector(".popup-user");
 //  формa
-const formElement = document.querySelector(".popup__container"); // Воспользуйтесь методом querySelector()
+const formElement = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
 // поля формы в DOM
-const nameInput = document.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = document.querySelector(".popup__input_type_job"); // Воспользуйтесь инструментом .querySelector()
+const nameInput = document.querySelector(".popup-user__input_type_name"); // Воспользуйтесь инструментом .querySelector()
+const jobInput = document.querySelector(".popup-user__input_type_job"); // Воспользуйтесь инструментом .querySelector()
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
@@ -16,13 +16,17 @@ const title = document.querySelector('.photo-grid__title');
 const pic = document.querySelector(".photo-grid__pic");
 const photoContainer = document.querySelector('.photo-grid');
 const popupPhotos = document.querySelector(".popup-photos");
-const formElementPhotos = document.querySelector(".popup-photos__form");
+
 const addButton = document.querySelector(".profile__add-button");
 const closeButtonPhoto = document.querySelector(".popup-photos__close");
 const photoItem = document.querySelector(".photo-grid__item");
 const photoTemplate = document.querySelector("#photos-element");
-const cardName = document.querySelector(".popup-photos__input_type_card-name");
-const cardSrc = document.querySelector(".popup-photos__input_type_card-src");
+
+//Submit для фотографий
+const photoName = document.querySelector('.popup-photos__input_type_card-name');
+const photoLink = document.querySelector('.popup-photos__input_type_card-src');
+const photoContain = document.querySelector('.popup-photos__container');
+
 const initialCards = [
   {
     name: "Архыз",
@@ -51,9 +55,10 @@ const initialCards = [
 ];
 
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-const popupFullscreen = document.querySelector(".popup_type_fullscreen");
-const fullscreenImage = document.querySelector(".popup__fullscreen-image");
-const fullscreenText = document.querySelector(".popup__fullscreen-text");
+let popUpPhotos = document.querySelector('.popup-fullscreen');
+let popUpPhotosImage = popUpPhotos.querySelector('.popup-fullscreen__image');
+let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-fullscreen__figcaption');
+let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-fullscreen__close-button');
 
 //Добавить разметку карточки
 const cardTemplate = document.querySelector('#photos-element').content;
@@ -80,6 +85,24 @@ initialCards.forEach(function(item) {
 
 
 
+// ФУНКЦИЯ сабмит добавления карточки
+function submitPhotoForm (evt) {
+    evt.preventDefault();
+    const cardAddedByUser = {
+      name: photoName.value,
+      link: photoLink.value
+    };
+    insertCard(cardAddedByUser);
+    toggleModalWindow(photoForm);
+    photoName.value = '';
+    photoLink.value = '';
+}
+
+function setSubmitHandler(form, submitHandler) {
+  form.addEventListener('submit', submitHandler);
+}
+
+setSubmitHandler(photoContain, submitPhotoForm);
 
 //ЛАЙК
 const cardList = document.querySelector(".photo-grid");
@@ -99,14 +122,14 @@ function formSubmitHandler(evt) {
 }
 
 function popupOpen() {
-  popup.classList.add("popup_opened");
+  popup.classList.add("popup-user_opened");
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
 function popupClose() {
-  popup.classList.remove("popup_opened");
+  popup.classList.remove("popup-user_opened");
 }
 
 

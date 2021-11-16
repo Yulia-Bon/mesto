@@ -39,13 +39,16 @@
 
 
 
-@import url(../bloсks/popup/popup.css);
-@import url(../bloсks/popup/__close/popup__close.css);
-@import url(../bloсks/popup/__input/popup__input.css);
-@import url(../bloсks/popup/__title/popup__title.css);
-@import url(../bloсks/popup/__container/popup__container.css);
-@import url(../bloсks/popup/__submit/popup__submit.css);
-@import url(../bloсks/popup/_opened/popup_opened.css);
-@import url(../bloсks/popup/__fullscreen-container/popup__fullscreen-container.css);
-@import url(../bloсks/popup/__fullscreen-image/popup__fullscreen-image.css);
-@import url(../bloсks/popup/__fullscreen-text/popup__fullscreen-text.css);
+@import url(../bloсks/popup-user/popup-user.css);
+@import url(../bloсks/popup-user/__close/popup-user__close.css);
+@import url(../bloсks/popup-user/__input/popup-user__input.css);
+@import url(../bloсks/popup-user/__title/popup-user__title.css);
+@import url(../bloсks/popup-user/__container/popup-user__container.css);
+@import url(../bloсks/popup-user/__submit/popup-user__submit.css);
+@import url(../bloсks/popup-user/_opened/popup-user_opened.css);
+
+
+@import url(../bloсks/popup-fullscreen/__container/popup-fullscreen__container.css);
+@import url(../bloсks/popup-fullscreen/__figcaption/popup-fullscreen__figcaption.css);
+@import url(../bloсks/popup-fullscreen/__figure/popup-fullscreen__figure.css);
+@import url(../bloсks/popup-fullscreen/__image/popup-fullscreen__image.css);
