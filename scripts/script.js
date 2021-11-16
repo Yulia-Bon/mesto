@@ -55,13 +55,37 @@ const initialCards = [
 ];
 
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-let popUpPhotos = document.querySelector('.popup-fullscreen');
-let popUpPhotosImage = popUpPhotos.querySelector('.popup-fullscreen__image');
-let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-fullscreen__figcaption');
-let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-fullscreen__close-button');
+//let popUpPhotos = document.querySelector('.popup-fullscreen');
+//let popUpPhotosImage = popUpPhotos.querySelector('.popup-fullscreen__image');
+//let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-fullscreen__figcaption');
+//let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-fullscreen__close-button');
 
 //Добавить разметку карточки
 const cardTemplate = document.querySelector('#photos-element').content;
+
+//Вставить карточку в галерею
+const photoGallery = document.querySelector('.photo-grid');
+
+//ЛАЙК
+const cardList = document.querySelector(".photo-grid");
+
+// Прикрепляем обработчики к формам:
+// они будет следить за событиеми “submit” - «отправка» и "click"
+
+closeButtonPhoto.addEventListener("click", popupClosePhoto);
+addButton.addEventListener("click", popupOpenPhoto);
+formElement.addEventListener("submit", formSubmitHandler);
+closeButton.addEventListener("click", popupClose);
+editButton.addEventListener("click", popupOpen);
+cardList.addEventListener("click", likePhoto);
+photoContain.addEventListener('submit', formSubmitHandlerPhoto);
+cardList.addEventListener('click', deletePhoto);
+
+//Вывести карточки на страницу
+initialCards.forEach(function(item) {
+  insertCard(item);
+});
+
 function addCard(src, name) {
   const cardItem = cardTemplate.cloneNode(true);
   cardItem.querySelector('.photo-grid__pic').src = src;
@@ -70,43 +94,10 @@ function addCard(src, name) {
   return cardItem;
 }
 
-
-
-//Вставить карточку в галерею
-const photoGallery = document.querySelector('.photo-grid');
 function insertCard(card) {
   const photoCard = addCard(card.link, card.name);
   photoGallery.prepend(photoCard);
 }
-//Вывести карточки на страницу
-initialCards.forEach(function(item) {
-  insertCard(item);
-});
-
-
-
-// ФУНКЦИЯ сабмит добавления карточки
-function submitPhotoForm (evt) {
-    evt.preventDefault();
-    const cardAddedByUser = {
-      name: photoName.value,
-      link: photoLink.value
-    };
-    insertCard(cardAddedByUser);
-    toggleModalWindow(photoForm);
-    photoName.value = '';
-    photoLink.value = '';
-}
-
-function setSubmitHandler(form, submitHandler) {
-  form.addEventListener('submit', submitHandler);
-}
-
-setSubmitHandler(photoContain, submitPhotoForm);
-
-//ЛАЙК
-const cardList = document.querySelector(".photo-grid");
-
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
@@ -132,8 +123,6 @@ function popupClose() {
   popup.classList.remove("popup-user_opened");
 }
 
-
-
 // ФУНКЦИЯ ДЛЯ ЛАЙКА
 function likePhoto(evt) {
   if (!evt.target.matches(".photo-grid__like")) {
@@ -143,15 +132,26 @@ function likePhoto(evt) {
   }
 }
 
-
-
-
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
 // Обработчик «отправки» формы
 function formSubmitHandlerPhoto(evt) {
-  evt.preventDefault(); // отменяет стандартную отправку формы
+  // отменяет стандартную отправку формы
+  evt.preventDefault(); 
+  submitPhotoForm(evt);
   // Закрываем попап
   popupClosePhoto();
+}
+
+// ФУНКЦИЯ сабмит добавления карточки
+function submitPhotoForm (evt) {    
+    const cardAddedByUser = {
+      name: photoName.value,
+      link: photoLink.value
+    };
+    insertCard(cardAddedByUser);
+    
+    photoName.value = '';
+    photoLink.value = '';
 }
 
 function popupOpenPhoto() {
@@ -161,7 +161,6 @@ function popupOpenPhoto() {
 function popupClosePhoto() {
   popupPhotos.classList.remove("popup-photos_opened");
 }
-
 
 //УДАЛИТЬ КАРТОЧКУ
 function deletePhoto(evt) {
@@ -173,22 +172,3 @@ function deletePhoto(evt) {
     cardToDelete.remove();
   }
 }
-cardList.addEventListener('click', deletePhoto);
-//Поменять класс
-function toggleModalWindow(popup) {
-  popup.classList.toggle('popup_opened');
-}
-
-
-
-
-// Прикрепляем обработчики к формам:
-// они будет следить за событиеми “submit” - «отправка» и "click"
-
-closeButtonPhoto.addEventListener("click", popupClosePhoto);
-addButton.addEventListener("click", popupOpenPhoto);
-formElement.addEventListener("submit", formSubmitHandler);
-closeButton.addEventListener("click", popupClose);
-editButton.addEventListener("click", popupOpen);
-cardList.addEventListener("click", likePhoto);
-
