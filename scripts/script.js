@@ -65,18 +65,6 @@ const popuoFullCloseButton = document.querySelector(".popup-fullscreen__close-bu
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
 
-// Прикрепляем обработчики к формам:
-// они будет следить за событиеми “submit” - «отправка» и "click"
-popuoFullCloseButton.addEventListener("click", popupFullClose);
-closeButtonPhoto.addEventListener("click", popupClosePhoto);
-addButton.addEventListener("click", popupOpenPhoto);
-formElement.addEventListener("submit", formSubmitHandler);
-closeButton.addEventListener("click", popupClose);
-editButton.addEventListener("click", popupOpen);
-cardList.addEventListener("click", likePhoto);
-photoContain.addEventListener("submit", formSubmitHandlerPhoto);
-cardList.addEventListener("click", deletePhoto);
-//pic.addEventListener('click', popupOpenFullscreen);
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -85,7 +73,6 @@ initialCards.forEach(function (item) {
 
 function insertCard(card) {
   const photoCard = addCard(card.link, card.name);
-
   cardList.prepend(photoCard);
 }
 
@@ -94,22 +81,14 @@ function addCard(src, name) {
   cardItem.querySelector(".photo-grid__pic").src = src;
   cardItem.querySelector(".photo-grid__pic").alt = name;
   cardItem.querySelector(".photo-grid__title").textContent = name;
-
   const pic = cardItem.querySelector(".photo-grid__pic");
-
   pic.addEventListener("click", popupFullOpen);
-
   return cardItem;
 }
 
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
 function formSubmitHandlerFull(evt) {
   evt.preventDefault(); //отменяет стандартную отправку формы.
-
-  // Получите значение полей jobInput и nameInput из свойства value
-  // profileName.textContent = nameInput.value;
-  // profileJob.textContent = jobInput.value;
-
   // Закрываем попап
   popupFullClose();
 }
@@ -119,13 +98,10 @@ function popupFullOpen(evt) {
 
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
-  //popupFullImage.querySelector('.popup-fullscreen__figcaption').textContent = evt.target.name;
   popupFullFigcaption.textContent = evt.target.alt;
-  //openPopup(popupFullImage);
+  
 }
 
-//nameInput.value = profileName.textContent;
-//jobInput.value = profileJob.textContent;
 
 function popupFullClose() {
   popupFullPhotos.classList.remove("popup-fullscreen_opened");
@@ -204,3 +180,14 @@ function deletePhoto(evt) {
   }
 }
 
+// Прикрепляем обработчики к формам:
+// они будет следить за событиеми “submit” - «отправка» и "click"
+popuoFullCloseButton.addEventListener("click", popupFullClose);
+closeButtonPhoto.addEventListener("click", popupClosePhoto);
+addButton.addEventListener("click", popupOpenPhoto);
+formElement.addEventListener("submit", formSubmitHandler);
+closeButton.addEventListener("click", popupClose);
+editButton.addEventListener("click", popupOpen);
+cardList.addEventListener("click", likePhoto);
+photoContain.addEventListener("submit", formSubmitHandlerPhoto);
+cardList.addEventListener("click", deletePhoto);
