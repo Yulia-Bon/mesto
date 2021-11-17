@@ -74,7 +74,7 @@ const cardList = document.querySelector(".photo-grid");
 
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
-
+closeButton.addEventListener("click", popupFullClose);
 closeButtonPhoto.addEventListener("click", popupClosePhoto);
 addButton.addEventListener("click", popupOpenPhoto);
 formElement.addEventListener("submit", formSubmitHandler);
@@ -103,7 +103,8 @@ function addCard(src, name) {
   cardItem.querySelector('.photo-grid__title').textContent = name;
 
   const pic = cardItem.querySelector('.photo-grid__pic');
-  pic.addEventListener('click', popupFullOpen);
+   
+  pic.addEventListener('click', popupFullOpen, pic);
 
   return cardItem;
 }
@@ -122,12 +123,20 @@ function formSubmitHandlerFull(evt) {
   popupFullClose();
 }
 
-function popupFullOpen() {
+function popupFullOpen(evt) {
   popupFullPhotos.classList.add("popup-fullscreen_opened");
+  
+  popupFullImage.src = evt.target.src;
+  popupFullImage.alt = evt.target.alt;
+  //popupFullImage.querySelector('.popup-fullscreen__figcaption').textContent = evt.target.name;
+  popupFullFigcaption.textContent = evt.target.alt;
+  openPopup(popupFullImage);
+}
+
 
   //nameInput.value = profileName.textContent;
   //jobInput.value = profileJob.textContent;
-}
+
 
 function popupFullClose() {
   popupFullPhotos.classList.remove("popup-fullscreen_opened");
