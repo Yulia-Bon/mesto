@@ -13,7 +13,7 @@ const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
 const title = document.querySelector('.photo-grid__title');
-const pic = document.querySelector(".photo-grid__pic");
+let pic = document.querySelector('.photo-grid__pic');
 const photoContainer = document.querySelector('.photo-grid');
 const popupPhotos = document.querySelector(".popup-photos");
 
@@ -55,10 +55,13 @@ const initialCards = [
 ];
 
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-//let popUpPhotos = document.querySelector('.popup-fullscreen');
-//let popUpPhotosImage = popUpPhotos.querySelector('.popup-fullscreen__image');
-//let popUpPhotosFigcaption = popUpPhotos.querySelector('.popup-fullscreen__figcaption');
-//let popUpPhotosCloseButton = popUpPhotos.querySelector('.popup-fullscreen__close-button');
+const popupFullContainer = document.querySelector('.popup-fullscreen__container');
+const popupFullPhotos = document.querySelector('.popup-fullscreen');
+const popupFullImage = document.querySelector('.popup-fullscreen__image');
+const popupFullFigcaption = document.querySelector('.popup-fullscreen__figcaption');
+const popuoFullCloseButton = document.querySelector('.popup-fullscreen__close-button');
+
+
 
 //Добавить разметку карточки
 const cardTemplate = document.querySelector('#photos-element').content;
@@ -80,24 +83,61 @@ editButton.addEventListener("click", popupOpen);
 cardList.addEventListener("click", likePhoto);
 photoContain.addEventListener('submit', formSubmitHandlerPhoto);
 cardList.addEventListener('click', deletePhoto);
+//pic.addEventListener('click', popupOpenFullscreen);
 
 //Вывести карточки на страницу
 initialCards.forEach(function(item) {
   insertCard(item);
 });
 
+function insertCard(card) {
+  const photoCard = addCard(card.link, card.name);
+
+  photoGallery.prepend(photoCard);
+}
+
 function addCard(src, name) {
   const cardItem = cardTemplate.cloneNode(true);
   cardItem.querySelector('.photo-grid__pic').src = src;
   cardItem.querySelector('.photo-grid__pic').alt = name;
   cardItem.querySelector('.photo-grid__title').textContent = name;
+
+  const pic = cardItem.querySelector('.photo-grid__pic');
+  cardItem.addEventListener('click', popupFullOpen);
+
   return cardItem;
 }
 
-function insertCard(card) {
-  const photoCard = addCard(card.link, card.name);
-  photoGallery.prepend(photoCard);
+
+
+// Обработчик «отправки» формы, пока она никуда отправляться не будет
+function formSubmitHandlerFull(evt) {
+  evt.preventDefault(); //отменяет стандартную отправку формы.
+
+  // Получите значение полей jobInput и nameInput из свойства value
+ // profileName.textContent = nameInput.value;
+ // profileJob.textContent = jobInput.value;
+
+  // Закрываем попап
+  popupFullClose();
 }
+
+function popupFullOpen() {
+  popupFullPhotos.classList.add("popup-fullscreen_opened");
+
+  //nameInput.value = profileName.textContent;
+  //jobInput.value = profileJob.textContent;
+}
+
+function popupFullClose() {
+  popupFullPhotos.classList.remove("popup-fullscreen_opened");
+}
+
+
+
+
+
+
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
@@ -122,6 +162,7 @@ function popupOpen() {
 function popupClose() {
   popup.classList.remove("popup-user_opened");
 }
+
 
 // ФУНКЦИЯ ДЛЯ ЛАЙКА
 function likePhoto(evt) {
@@ -171,4 +212,40 @@ function deletePhoto(evt) {
     const cardToDelete = evt.target.closest('.photo-grid__item');
     cardToDelete.remove();
   }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//fullskrin!!!!!!!!!!!!!!!!!!!!!!
+ //function  formSubmitHandlerPhotoFull(evt) {
+  //evt.preventDefault(); //отменяет стандартную отправку формы.
+
+  // Получите значение полей jobInput и nameInput из свойства value
+  //title.textContent = popupFullFigcaption.value;
+ // profileJob.textContent = jobInput.value;
+
+  // Закрываем попап
+function popupOpenFullscreen () {
+  popupFullPhotos.classList.add('.popup-fullscreen_opened')
 }
+
+
+  
+
+
+//FULLSKRIN FINIH
+*/

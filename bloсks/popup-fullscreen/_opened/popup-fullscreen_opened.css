@@ -1,0 +1,5 @@
+.popup-fullscreen_opened{
+    opacity: 1; /* Показываем фон и попап*/
+    transition: 0.5s all;
+    visibility: visible;
+}

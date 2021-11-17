@@ -48,7 +48,9 @@
 @import url(../bloсks/popup-user/_opened/popup-user_opened.css);
 
 
+@import url(../bloсks/popup-fullscreen/popup-fullscreen.css);
+@import url(../bloсks/popup-fullscreen/_opened/popup-fullscreen_opened.css);
 @import url(../bloсks/popup-fullscreen/__container/popup-fullscreen__container.css);
 @import url(../bloсks/popup-fullscreen/__figcaption/popup-fullscreen__figcaption.css);
-@import url(../bloсks/popup-fullscreen/__figure/popup-fullscreen__figure.css);
 @import url(../bloсks/popup-fullscreen/__image/popup-fullscreen__image.css);
+@import url(../bloсks/popup-fullscreen/__figure/popup-fullscreen__figure.css);
