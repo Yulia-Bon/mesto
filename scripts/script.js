@@ -16,7 +16,6 @@ const title = document.querySelector(".photo-grid__title");
 const pic = document.querySelector(".photo-grid__pic");
 const photoContainer = document.querySelector(".photo-grid");
 const popupPhotos = document.querySelector(".popup-photos");
-
 const addButton = document.querySelector(".profile__add-button");
 const closeButtonPhoto = document.querySelector(".popup-photos__close");
 const photoItem = document.querySelector(".photo-grid__item");
@@ -26,7 +25,6 @@ const photoTemplate = document.querySelector("#photos-element");
 const photoName = document.querySelector(".popup-photos__input_type_card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 const photoContain = document.querySelector(".popup-photos__container");
-
 const initialCards = [
   {
     name: "Архыз",
@@ -95,11 +93,9 @@ function formSubmitHandlerFull(evt) {
 
 function popupFullOpen(evt) {
   popupFullPhotos.classList.add("popup-fullscreen_opened");
-
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
-  
 }
 
 
@@ -111,18 +107,15 @@ function popupFullClose() {
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
 function formSubmitHandler(evt) {
   evt.preventDefault(); //отменяет стандартную отправку формы.
-
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-
   // Закрываем попап
   popupClose();
 }
 
 function popupOpen() {
   popup.classList.add("popup-user_opened");
-
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
@@ -155,9 +148,8 @@ function submitPhotoForm(evt) {
   const cardAddedByUser = {
     name: photoName.value,
     link: photoLink.value,
-  };
+};
   insertCard(cardAddedByUser);
-
   photoName.value = "";
   photoLink.value = "";
 }
