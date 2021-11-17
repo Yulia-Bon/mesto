@@ -104,7 +104,7 @@ function addCard(src, name) {
 
   const pic = cardItem.querySelector('.photo-grid__pic');
    
-  pic.addEventListener('click', popupFullOpen, pic);
+  pic.addEventListener('click', popupFullOpen);
 
   return cardItem;
 }
