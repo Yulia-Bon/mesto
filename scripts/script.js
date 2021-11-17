@@ -103,7 +103,7 @@ function addCard(src, name) {
   cardItem.querySelector('.photo-grid__title').textContent = name;
 
   const pic = cardItem.querySelector('.photo-grid__pic');
-  cardItem.addEventListener('click', popupFullOpen);
+  pic.addEventListener('click', popupFullOpen);
 
   return cardItem;
 }
