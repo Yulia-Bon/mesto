@@ -15,13 +15,13 @@ const buttonAdd = document.querySelector(".profile__add-button");
 // ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
 const userContainer = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
 // поля формы в DOM
-const nameInput = document.querySelector(".popup-user__input_type_name");
+const nameInput = document.querySelector(".popup-user__input-name");
 const jobInput = document.querySelector(".popup-user__input_type_job"); 
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
-const photoName = document.querySelector(".popup-photos__input_type_card-name");
+const photoName = document.querySelector(".popup-photos__input-card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 const photoContainer = document.querySelector(".popup-photos__container");
 const initialCards = [
