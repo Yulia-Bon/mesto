@@ -13,11 +13,10 @@ const buttonEdit = document.querySelector(".profile__edit");
 const buttonAdd = document.querySelector(".profile__add-button");
 
 // ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
-//  формa
 const userContainer = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
 // поля формы в DOM
-const nameInput = document.querySelector(".popup-user__input_type_name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = document.querySelector(".popup-user__input_type_job"); // Воспользуйтесь инструментом .querySelector()
+const nameInput = document.querySelector(".popup-user__input_type_name");
+const jobInput = document.querySelector(".popup-user__input_type_job"); 
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
@@ -102,12 +101,14 @@ function addCard(src, name) {
   return cardItem;
 }
 
+
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
 }
 
-// Обработчик «отправки» формы, пока она никуда отправляться не будет
+
+// Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
   evt.preventDefault();  
  // popupFullPhotos.classList.add("popup_opened");
@@ -118,6 +119,7 @@ function handlerFullFormSubmit(evt) {
   // Закрываем попап
 togglePopup(popupFull);
 }
+
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
@@ -131,7 +133,6 @@ function submitHandlerForm(evt) {
 }
 
 
-
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
 // Обработчик «отправки» формы
 function submitHandlerFormPhoto(evt) {
@@ -141,6 +142,7 @@ function submitHandlerFormPhoto(evt) {
   // Закрываем попап
   togglePopup(popupPhotos);
 }
+
 
 // ФУНКЦИЯ сабмит добавления карточки
 function submitPhotoForm(evt) {
@@ -152,7 +154,6 @@ function submitPhotoForm(evt) {
   photoName.value = "";
   photoLink.value = "";
 }
-
 
 
 // Прикрепляем обработчики к формам:
