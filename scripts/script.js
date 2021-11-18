@@ -14,7 +14,7 @@ const buttonAdd = document.querySelector(".profile__add-button");
 
 // ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
 //  формa
-const formElement = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
+const userContainer = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
 // поля формы в DOM
 const nameInput = document.querySelector(".popup-user__input_type_name"); // Воспользуйтесь инструментом .querySelector()
 const jobInput = document.querySelector(".popup-user__input_type_job"); // Воспользуйтесь инструментом .querySelector()
@@ -22,16 +22,9 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
-const title = document.querySelector(".photo-grid__title");
-const pic = document.querySelector(".photo-grid__pic");
-const photoContainer = document.querySelector(".photo-grid");
-const photoItem = document.querySelector(".photo-grid__item");
-const photoTemplate = document.querySelector("#photos-element");
-
-//Submit для фотографий
 const photoName = document.querySelector(".popup-photos__input_type_card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
-const photoContain = document.querySelector(".popup-photos__container");
+const photoContainer = document.querySelector(".popup-photos__container");
 const initialCards = [
   {
     name: "Архыз",
@@ -60,15 +53,32 @@ const initialCards = [
 ];
 
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-const popupFullContainer = document.querySelector(".popup-fullscreen__container");
-const popupFullImage = document.querySelector(".popup-fullscreen__image");
-const popupFullFigcaption = document.querySelector(".popup-fullscreen__figcaption");
+const popupFullImage = document.querySelector(".popup__image");
+const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
 
 //Добавить разметку карточки
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
 
+//УДАЛИТЬ КАРТОЧКУ
+function deletePhoto(evt) {
+  if (!evt.target.matches(".photo-grid__delete-button")) {
+    return;
+  } else {
+    const cardToDelete = evt.target.closest(".photo-grid__item");
+    cardToDelete.remove();
+  }
+}
+
+// ФУНКЦИЯ ДЛЯ ЛАЙКА
+function likePhoto(evt) {
+  if (!evt.target.matches(".photo-grid__like")) {
+    return;
+  } else {
+    evt.target.classList.toggle("photo-grid__like_active");
+  }
+}
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -82,65 +92,54 @@ function insertCard(card) {
 
 function addCard(src, name) {
   const cardItem = cardTemplate.cloneNode(true);
-  cardItem.querySelector(".photo-grid__pic").src = src;
-  cardItem.querySelector(".photo-grid__pic").alt = name;
+  const picPhotoGrid = cardItem.querySelector(".photo-grid__pic");
+  picPhotoGrid.src = src;
+  picPhotoGrid.alt = name;
   cardItem.querySelector(".photo-grid__title").textContent = name;
-  const pic = cardItem.querySelector(".photo-grid__pic");
-  pic.addEventListener("click", popupFullOpen);
+  picPhotoGrid.addEventListener("click", handlerFullFormSubmit);
+  cardList.addEventListener("click", deletePhoto);
+  cardList.addEventListener("click", likePhoto);
   return cardItem;
 }
 
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
-function popupToggle(popup) {
+function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
 }
 
-
-
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
-function formSubmitHandlerFull(evt) {
+function handlerFullFormSubmit(evt) {
+  evt.preventDefault();  
+ // popupFullPhotos.classList.add("popup_opened");
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
-  evt.preventDefault(); //отменяет стандартную отправку формы.
+  //отменяет стандартную отправку формы.
   // Закрываем попап
-  popupToggle();
+togglePopup(popupFull);
 }
-
-
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
-function formSubmitHandler(evt) {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+function submitHandlerForm(evt) {
   evt.preventDefault(); //отменяет стандартную отправку формы.
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   // Закрываем попап
-  popupToggle();
+  togglePopup(popupUser);
 }
 
 
-
-// ФУНКЦИЯ ДЛЯ ЛАЙКА
-function likePhoto(evt) {
-  if (!evt.target.matches(".photo-grid__like")) {
-    return;
-  } else {
-    evt.target.classList.toggle("photo-grid__like_active");
-  }
-}
 
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
 // Обработчик «отправки» формы
-function formSubmitHandlerPhoto(evt) {
+function submitHandlerFormPhoto(evt) {
   // отменяет стандартную отправку формы
   evt.preventDefault();
   submitPhotoForm(evt);
   // Закрываем попап
-  popupToggle();
+  togglePopup(popupPhotos);
 }
 
 // ФУНКЦИЯ сабмит добавления карточки
@@ -156,27 +155,13 @@ function submitPhotoForm(evt) {
 
 
 
-//УДАЛИТЬ КАРТОЧКУ
-function deletePhoto(evt) {
-  if (!evt.target.matches(".photo-grid__delete-button")) {
-    return;
-  } else {
-    const cardToDelete = evt.target.closest(".photo-grid__item");
-    cardToDelete.remove();
-  }
-}
-
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
-popuoFullCloseButton.addEventListener("click", () => togglePopup(popupUser))
-closeButtonPhoto.addEventListener("click", popupClosePhoto);
-addButton.addEventListener("click", popupOpenPhoto);
+fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull))
+photoButtonClosePopup.addEventListener("click", () => togglePopup(popupPhotos));
+buttonAdd.addEventListener("click", () => togglePopup(popupPhotos));
+userButtonClosePopup.addEventListener("click", () => togglePopup(popupUser));
+buttonEdit.addEventListener("click", () => togglePopup(popupUser));
+userContainer.addEventListener("submit", submitHandlerForm);
 
-closeButton.addEventListener("click", popupClose);
-editButton.addEventListener("click", popupOpen);
-
-formElement.addEventListener("submit", formSubmitHandler);
-
-cardList.addEventListener("click", likePhoto);
-photoContain.addEventListener("submit", formSubmitHandlerPhoto);
-cardList.addEventListener("click", deletePhoto);
+photoContainer.addEventListener("submit", submitHandlerFormPhoto);
