@@ -43,37 +43,37 @@
 
 
 <!--POPUP РЕДАКТИРОВАНИЯ ПРОФИЛЯ-->
-    <section class="popup-user">
-    <div class="popup-user__container">
+    <section class="popup popup-user">
+    <div class="popup__container">
       <form action="#" method="POST" class="popup-user__form" name="popup-user_info"> 
-        <h2 class="popup-user__title">Редактировать профиль</h2>
-        <input name="you_name" type="text" value="" placeholder="Ваше имя" class="popup-user__input popup-user__input_type_name"/>
-        <input name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup-user__input popup-user__input_type_job"/>
-        <button class="popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
-        <button type="button" class="popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
+        <h2 class="popup__title popup-user__title">Редактировать профиль</h2>
+        <input required name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input_type_name" />
+        <input required name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup-user__input popup-user__input_type_job" />
+        <button class="popup__submit popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
+        <button type="button" class="popup__close popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
     </div>
    </section>
 <!--POPUP ДОБАВЛЕНИЯ КАРТОЧКИ-->
-   <section class="popup-photos">
-    <div class="popup-photos__container">
+   <section class="popup popup-photos">
+    <div class="popup__container">
       <form action="#" method="POST" class="popup-photos__form" name="popup-photos_info"> 
-        <h2 class="popup-photos__title">Новое место</h2>
-        <input name="name" type="text" value="" placeholder="Название" class="popup-photos__input popup-photos__input_type_card-name"/>
-        <input name="link" type="text" value="" placeholder="Ссылка на изображение " class="popup-photos__input popup-photos__input_type_card-src"/>
-        <button class="popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
-        <button type="button" class="popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
+        <h2 class="popup__title popup-photos__title">Новое место</h2>
+        <input required name="name" type="text" value="" placeholder="Название" class="popup__input popup-photos__input_type_card-name" />
+        <input required name="link" type="text" value="" placeholder="Ссылка на изображение " class="popup-photos__input popup-photos__input_type_card-src" />
+        <button class="popup__submit popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
+        <button type="button" class="popup__close popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
     </div>
    </section>
 
    <!--POPUP ФУЛЛСКРИНА КАРТИНКИ КАРТОЧКИ-->
-   <section class="popup-fullscreen">
-      <div class="popup-fullscreen__container">
-       <button class="popup-fullscreen__close-button" aria-label="закрыть просмотр фотографии"></button> 
-        <figure class="popup-fullscreen__figure">
-          <img src="#" alt="картинка" class="popup-fullscreen__image">
-          <figcaption class="popup-fullscreen__figcaption"></figcaption>
+   <section class="popup_fullscreen popup-fullscreen">
+      <div class="popup_fullscreen__container">
+       <button class="popup__close popup-fullscreen__close-button" aria-label="закрыть просмотр фотографии"></button> 
+        <figure class="popup__figure">
+          <img src="#" alt="картинка" class="popup__image popup-fullscreen__image">
+          <figcaption class="popup__figcaption popup-fullscreen__figcaption"></figcaption>
         </figure>
         
       </div>
