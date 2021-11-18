@@ -36,7 +36,7 @@
 @import url(../bloсks/popup/__submit/popup__submit.css);
 @import url(../bloсks/popup/__title/popup__title.css);
 @import url(../bloсks/popup/_fullscreen/popup_fullscreen.css);
-@import url(../bloсks/popup/_fullscreen/__container/popup_fullscreen__container.css);
+@import url(../bloсks/popup/__container/_fullscreen/popup__container_fullscreen.css.css);
 @import url(../bloсks/popup/__figure/popup__figure.css);
 @import url(../bloсks/popup/__figcaption/popup__figcaption.css);
 @import url(../bloсks/popup/_opened/popup_opened.css);

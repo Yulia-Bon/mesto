@@ -1,4 +1,4 @@
-.popup_fullscreen__container {
+.popup__container_fullscreen {
     position: relative;
     display: flex;
     flex-direction: column;
