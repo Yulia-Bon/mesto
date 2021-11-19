@@ -21,6 +21,8 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
+//const battonLikePhoto = document.querySelector(".photo-grid__like");
+//const battoDeletePhoto = document.querySelector(".photo-grid__delete-button");
 const photoName = document.querySelector(".popup-photos__input-card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 const photoContainer = document.querySelector(".popup-photos__container");
@@ -123,14 +125,31 @@ togglePopup(popupFull);
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 // Обработчик «отправки» формы, пока она никуда отправляться не будет
+//дефолтное значение при первом открытии попапа профиля
+
+
+
+const editProfile = function(evt) {
+togglePopup(popupUser);  
+nameInput.value = profileName.textContent;
+jobInput.value = profileJob.textContent;
+}
+
+
+
 function submitHandlerForm(evt) {
+
   evt.preventDefault(); //отменяет стандартную отправку формы.
   // Получите значение полей jobInput и nameInput из свойства value
+   
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  
   // Закрываем попап
-  togglePopup(popupUser);
+  togglePopup(popupUser); 
+ 
 }
+
 
 
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
@@ -158,11 +177,11 @@ function submitPhotoForm(evt) {
 
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
-fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull))
+fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull));
+//buttonEdit.addEventListener('click', editProfile);
 photoButtonClosePopup.addEventListener("click", () => togglePopup(popupPhotos));
 buttonAdd.addEventListener("click", () => togglePopup(popupPhotos));
 userButtonClosePopup.addEventListener("click", () => togglePopup(popupUser));
-buttonEdit.addEventListener("click", () => togglePopup(popupUser));
+buttonEdit.addEventListener("click",editProfile, () => togglePopup(popupUser), );
 userContainer.addEventListener("submit", submitHandlerForm);
-
 photoContainer.addEventListener("submit", submitHandlerFormPhoto);
