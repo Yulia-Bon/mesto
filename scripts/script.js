@@ -64,21 +64,14 @@ const cardList = document.querySelector(".photo-grid");
 
 //УДАЛИТЬ КАРТОЧКУ
 function deletePhoto(evt) {
-  if (!evt.target.matches(".photo-grid__delete-button")) {
-    return;
-  } else {
-    const cardToDelete = evt.target.closest(".photo-grid__item");
-    cardToDelete.remove();
-  }
+  const cardToDelete = evt.target.closest(".photo-grid__item");
+  cardToDelete.remove();
 }
+
 
 // ФУНКЦИЯ ДЛЯ ЛАЙКА
 function likePhoto(evt) {
-  if (!evt.target.matches(".photo-grid__like")) {
-    return;
-  } else {
-    evt.target.classList.toggle("photo-grid__like_active");
-  }
+  evt.target.classList.toggle("photo-grid__like_active");
 }
 
 //Вывести карточки на страницу
