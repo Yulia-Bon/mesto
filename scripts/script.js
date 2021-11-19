@@ -21,8 +21,8 @@ const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
-//const battonLikePhoto = document.querySelector(".photo-grid__like");
-//const battoDeletePhoto = document.querySelector(".photo-grid__delete-button");
+const battonLikePhoto = document.querySelector(".photo-grid__like");
+const battoDeletePhoto = document.querySelector(".photo-grid__delete-button");
 const photoName = document.querySelector(".popup-photos__input-card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 const photoContainer = document.querySelector(".popup-photos__container");
@@ -92,15 +92,22 @@ function insertCard(card) {
 }
 
 function addCard(src, name) {
+  
   const cardItem = cardTemplate.cloneNode(true);
+  const buttonLikePhoto = cardItem.querySelector(".photo-grid__like");
+  const buttonDeletePhoto = cardItem.querySelector(".photo-grid__delete-button");
   const picPhotoGrid = cardItem.querySelector(".photo-grid__pic");
+
   picPhotoGrid.src = src;
   picPhotoGrid.alt = name;
+
   cardItem.querySelector(".photo-grid__title").textContent = name;
   picPhotoGrid.addEventListener("click", handlerFullFormSubmit);
-  cardList.addEventListener("click", deletePhoto);
-  cardList.addEventListener("click", likePhoto);
+  buttonDeletePhoto.addEventListener("click", deletePhoto);
+  buttonLikePhoto.addEventListener("click", likePhoto);
+
   return cardItem;
+  
 }
 
 
