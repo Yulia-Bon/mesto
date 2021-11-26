@@ -1,4 +1,5 @@
 //POPUP
+
 const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
 const popupFull = document.querySelector(".popup-fullscreen");
@@ -175,6 +176,18 @@ function submitPhotoForm(evt) {
 }
 
 
+
+
+// Закрываем попап по нажатию Escape
+//const popupOpened = document.querySelector(".popup_opened");
+function keyHandler(evt) {
+  if (evt.key === 'Escape') {
+    togglePopup(popupUser);
+  }
+};
+
+
+
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
 fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull));
@@ -183,5 +196,10 @@ photoButtonClosePopup.addEventListener("click", () => togglePopup(popupPhotos));
 buttonAdd.addEventListener("click", () => togglePopup(popupPhotos));
 userButtonClosePopup.addEventListener("click", () => togglePopup(popupUser));
 buttonEdit.addEventListener("click",editProfile, () => togglePopup(popupUser), );
+
 userContainer.addEventListener("submit", submitHandlerForm);
 photoContainer.addEventListener("submit", submitHandlerFormPhoto);
+
+
+userContainer.addEventListener('keydown', keyHandler);
+//photoContainer.addEventListener('keydown', keyHandler);

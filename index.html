@@ -47,8 +47,8 @@
     <div class="popup__container popup-user__container">
       <form action="#" method="POST" class="popup-user__form" name="popup-user_info"> 
         <h2 class="popup__title popup-user__title">Редактировать профиль</h2>
-        <input required name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name"/>
-        <input required name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" />
+        <input required name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name" minlength="2" maxlength="40"/>
+        <input required name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
         <button class="popup__submit popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
@@ -59,8 +59,8 @@
     <div class="popup__container popup-photos__container">
       <form action="#" method="POST" class="popup-photos__form" name="popup-photos_info"> 
         <h2 class="popup__title popup-photos__title">Новое место</h2>
-        <input required name="name" type="text" value="" placeholder="Название" class="popup__input popup-photos__input-card-name"/><!--тесты ЯР решили ругнуться на предыдущее название-->
-        <input required name="link" type="text" value="" placeholder="Ссылка на изображение " class="popup__input popup-photos__input popup-photos__input_type_card-src" />
+        <input required name="name" type="text" value="" placeholder="Название" class="popup__input popup-photos__input-card-name" minlength="2" maxlength="30"/><!--тесты ЯР решили ругнуться на предыдущее название-->
+        <input required name="link" type="url" value="" placeholder="Ссылка на изображение " class="popup__input popup-photos__input popup-photos__input_type_card-src" />
         <button class="popup__submit popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>

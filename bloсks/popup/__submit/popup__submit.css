@@ -23,3 +23,10 @@
 .popup__submit:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+.popup__submit:valid {
+
+}
+.popup__submit:invalid {
+  border: 1px solid red;
+}
