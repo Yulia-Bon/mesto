@@ -183,6 +183,7 @@ function submitPhotoForm(evt) {
 function keyHandler(evt) {
   if (evt.key === 'Escape') {
     togglePopup(popupUser);
+    //togglePopup(popupPhotos);
   }
 };
 

@@ -45,10 +45,12 @@
 <!--POPUP РЕДАКТИРОВАНИЯ ПРОФИЛЯ-->
     <section class="popup popup-user">
     <div class="popup__container popup-user__container">
-      <form action="#" method="POST" class="popup-user__form" name="popup-user_info"> 
+      <form action="#" method="POST" class="popup-user__form" name="popup-user_info"  novalidate> 
         <h2 class="popup__title popup-user__title">Редактировать профиль</h2>
         <input required name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name" minlength="2" maxlength="40"/>
+          <span class="popup__input-error userName-input-error"></span>
         <input required name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
+          <span class="popup__input-error userAbout-input-error"></span>
         <button class="popup__submit popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
@@ -57,10 +59,12 @@
 <!--POPUP ДОБАВЛЕНИЯ КАРТОЧКИ-->
    <section class="popup popup-photos">
     <div class="popup__container popup-photos__container">
-      <form action="#" method="POST" class="popup-photos__form" name="popup-photos_info"> 
+      <form action="#" method="POST" class="popup-photos__form" name="popup-photos_info"  novalidate> 
         <h2 class="popup__title popup-photos__title">Новое место</h2>
         <input required name="name" type="text" value="" placeholder="Название" class="popup__input popup-photos__input-card-name" minlength="2" maxlength="30"/><!--тесты ЯР решили ругнуться на предыдущее название-->
+          <span class="popup__input-error placeName-input-error"></span>
         <input required name="link" type="url" value="" placeholder="Ссылка на изображение " class="popup__input popup-photos__input popup-photos__input_type_card-src" />
+          <span class="popup__input-error placeUrl-input-error"></span>
         <button class="popup__submit popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
       </form>
@@ -93,6 +97,7 @@
 
 
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
 
