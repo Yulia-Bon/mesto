@@ -1,3 +1,7 @@
+const formElement = document.querySelector('.popup__form');
+const inputElement = document.querySelector('.popup__input');
+
+
 //POPUP
 
 const popupUser = document.querySelector(".popup-user");
@@ -63,6 +67,60 @@ const popupFullFigcaption = document.querySelector(".popup__figcaption");
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
 
+
+
+
+// ПРОВЕРКА ВАЛИДНОСТИ ФОРМЫ PROFILE 
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('popup__input-error_active');
+  errorElement.textContent = '';
+};
+
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement)
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__container'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+
+
+
+
+
+
+
+
+
 //УДАЛИТЬ КАРТОЧКУ
 function deletePhoto(evt) {
   const cardToDelete = evt.target.closest(".photo-grid__item");
@@ -108,8 +166,25 @@ function addCard(src, name) {
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
+ /*if (popup.classList.contains('popup_opened')) {
+  enableValidation(config);
+} else {
+  const formElement = document.querySelector('.popup__form');
+  formElement.reset();
+  cleanInputErrorValidation(popup, config); 
+}*/
 }
 
+
+
+ //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
+/*
+function closePopupByEsqButton(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    popupToggle(popupOpened);
+  }
+}*/
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
@@ -204,3 +279,8 @@ photoContainer.addEventListener("submit", submitHandlerFormPhoto);
 
 userContainer.addEventListener('keydown', keyHandler);
 //photoContainer.addEventListener('keydown', keyHandler);
+//document.addEventListener('keydown', closePopupByEsqButton);
+
+
+
+enableValidation();

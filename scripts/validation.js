@@ -1,7 +1,5 @@
 // ПРИМЕР ИЗ ПРАКТИКУМА
-
 /*
-
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add('form__input_type_error');
@@ -46,7 +44,4 @@ const enableValidation = () => {
 // Вызовем функцию
 enableValidation(); 
 
-
-
-
-*/ 
+*/
