@@ -5,8 +5,8 @@ const inputElement = document.querySelector('.popup__input');
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add('popup__input_type_error');
+  errorElement.classList.add('popup__input-error_active'); 
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
 };
 
 //функция для скрытия ошибки
@@ -18,7 +18,6 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 
-
 const cleanInputErrorValidation = (popup, config) => {
   const formElement = popup.querySelector(config.formSelector);
   const inputList = popup.querySelectorAll(config.inputList);
@@ -26,6 +25,7 @@ const cleanInputErrorValidation = (popup, config) => {
     hideInputError(config, formElement, inputElement);
   })
 };
+
 
 // функция для проверки на валидность инпутов
 const isValid = (formElement, inputElement) => {
@@ -38,19 +38,11 @@ const isValid = (formElement, inputElement) => {
 
 
 // ПРОВЕРКА ВАЛИДНОСТИ ФОРМЫ PROFILE 
-
-
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   })
 };
-
-
-
-
-
 
 
 // функция для установки слушателей проверки на валидность инпутов
@@ -69,6 +61,7 @@ const setEventListeners = (formElement) => {
   });
 };
 
+
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__container'));
   formList.forEach((formElement) => {
@@ -79,8 +72,6 @@ const enableValidation = () => {
   });
 };
 
-
-//cardData.addEventListener('submit', elementsInfoEdit);
 
 enableValidation({
   formSelector: '.popup__form',

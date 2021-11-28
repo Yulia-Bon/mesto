@@ -1,14 +1,12 @@
 
-
-
-/*const config = {
+const config = {
   formSelector: '.popup__form',
   inputList: '.popup__input',
-  buttonElement: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
+  buttonElement: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
-}*/
+}
 
 //POPUP
 const popup = document.querySelector(".popup")
@@ -77,13 +75,12 @@ const cardList = document.querySelector(".photo-grid");
 
 
 
-
+//функция закрытия попапов по оверлэй
 const closePopupTarget = (evt) => {
   if(evt.target === evt.currentTarget) {
     evt.currentTarget.classList.remove('popup_opened');
   }
 };
-
 
 //функция закрытия всех попапов по оверлэй
 const closePopupOverlay = () => {
@@ -92,9 +89,6 @@ const closePopupOverlay = () => {
   popup.addEventListener('click', closePopupTarget);
   });
 };
-
-
-
 
 
 //УДАЛИТЬ КАРТОЧКУ
@@ -138,36 +132,13 @@ function addCard(src, name) {
 }
 
 
-
-
-
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
- if (popup.classList.contains('popup_opened')) {
-  enableValidation(config);
-} else {
-  const formElement = document.querySelector('.popup__form');
-  formElement.reset();
-  cleanInputErrorValidation(popup, config); 
 }
-}
-
-
-
-
-
-//закрыть вне попапа
-const closeByClickingOverlay = function(evt) {
-  if (evt.target !== evt.currentTarget) { return; }
-  togglePopup(evt.target);
-}
-
-
 
 
  //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
-
 function closePopupByEsqButton(evt) {
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
@@ -175,6 +146,7 @@ function closePopupByEsqButton(evt) {
   }
   return;
 }
+
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
@@ -190,18 +162,11 @@ togglePopup(popupFull);
 
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-// Обработчик «отправки» формы, пока она никуда отправляться не будет
-//дефолтное значение при первом открытии попапа профиля
-
-
-
 const editProfile = function(evt) {
 togglePopup(popupUser);  
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 }
-
-
 
 function submitHandlerForm(evt) {
 
@@ -215,7 +180,6 @@ function submitHandlerForm(evt) {
   togglePopup(popupUser); 
  
 }
-
 
 
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
@@ -241,8 +205,6 @@ function submitPhotoForm(evt) {
 }
 
 
-
-
 // Закрываем попап по нажатию Escape
 //const popupOpened = document.querySelector(".popup_opened");
 function keyHandler(evt) {
@@ -251,7 +213,6 @@ function keyHandler(evt) {
     //togglePopup(popupPhotos);
   }
 };
-
 
 
 // Прикрепляем обработчики к формам:
@@ -266,20 +227,8 @@ buttonEdit.addEventListener("click",editProfile, () => togglePopup(popupUser), )
 userContainer.addEventListener("submit", submitHandlerForm);
 photoContainer.addEventListener("submit", submitHandlerFormPhoto);
 
-
 userContainer.addEventListener('keydown', keyHandler);
-//photoContainer.addEventListener('keydown', keyHandler);
-//document.addEventListener('keydown', closePopupByEsqButton);
-
-
-
-
 
 document.addEventListener('keydown', closePopupByEsqButton);
-
-
-userContainer.addEventListener('click', closeByClickingOverlay);
-
-
 
 popup.addEventListener('click', closePopupOverlay);
