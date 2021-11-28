@@ -19,7 +19,6 @@
 @import url(../bloсks/photo-grid/__like/_active/photo-grid__like_active.css);
 @import url(../bloсks/photo-grid/__delete-button/photo-grid__delete-button.css);
 
-
 @import url(../bloсks/profile/profile.css);
 @import url(../bloсks/profile/__add-button/profile__add-button.css);
 @import url(../bloсks/profile/__avatar/profile__avatar.css);
@@ -40,9 +39,7 @@
 @import url(../bloсks/popup/__figure/popup__figure.css);
 @import url(../bloсks/popup/__figcaption/popup__figcaption.css);
 @import url(../bloсks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
-@import url(../blocks/popup/__input-error/popup__input-error.css);
-@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
-
-
-
+@import url(../bloсks/popup/__submit/_inactive/popup__submit_inactive.css);
+@import url(../bloсks/popup/__input-error/popup__input-error.css);
+@import url(../bloсks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../bloсks/popup/__input/_type/popup__input_type_error.css);

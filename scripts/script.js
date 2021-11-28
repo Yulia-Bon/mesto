@@ -1,9 +1,17 @@
-const formElement = document.querySelector('.popup__form');
-const inputElement = document.querySelector('.popup__input');
 
+
+
+/*const config = {
+  formSelector: '.popup__form',
+  inputList: '.popup__input',
+  buttonElement: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}*/
 
 //POPUP
-
+const popup = document.querySelector(".popup")
 const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
 const popupFull = document.querySelector(".popup-fullscreen");
@@ -70,52 +78,20 @@ const cardList = document.querySelector(".photo-grid");
 
 
 
-// ПРОВЕРКА ВАЛИДНОСТИ ФОРМЫ PROFILE 
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
-  errorElement.textContent = '';
-};
-
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
+const closePopupTarget = (evt) => {
+  if(evt.target === evt.currentTarget) {
+    evt.currentTarget.classList.remove('popup_opened');
   }
 };
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
-    });
+
+//функция закрытия всех попапов по оверлэй
+const closePopupOverlay = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popup) => {
+  popup.addEventListener('click', closePopupTarget);
   });
 };
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__container'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-
-
-
 
 
 
@@ -158,33 +134,47 @@ function addCard(src, name) {
   buttonDeletePhoto.addEventListener("click", deletePhoto);
   buttonLikePhoto.addEventListener("click", likePhoto);
 
-  return cardItem;
-  
+  return cardItem; 
 }
+
+
+
 
 
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
- /*if (popup.classList.contains('popup_opened')) {
+ if (popup.classList.contains('popup_opened')) {
   enableValidation(config);
 } else {
   const formElement = document.querySelector('.popup__form');
   formElement.reset();
   cleanInputErrorValidation(popup, config); 
-}*/
+}
 }
 
 
 
+
+
+//закрыть вне попапа
+const closeByClickingOverlay = function(evt) {
+  if (evt.target !== evt.currentTarget) { return; }
+  togglePopup(evt.target);
+}
+
+
+
+
  //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
-/*
+
 function closePopupByEsqButton(evt) {
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    popupToggle(popupOpened);
+    togglePopup(popupOpened);
   }
-}*/
+  return;
+}
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
@@ -283,4 +273,13 @@ userContainer.addEventListener('keydown', keyHandler);
 
 
 
-enableValidation();
+
+
+document.addEventListener('keydown', closePopupByEsqButton);
+
+
+userContainer.addEventListener('click', closeByClickingOverlay);
+
+
+
+popup.addEventListener('click', closePopupOverlay);

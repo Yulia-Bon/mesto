@@ -9,6 +9,7 @@
   box-sizing: border-box;
   position: relative;
   margin-bottom: 37px;
+  outline: none;
 }
 
 @media screen and (max-width: 639px) {
