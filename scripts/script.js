@@ -1,12 +1,3 @@
-/*
-const config = {
-  formSelector: '.popup__form',
-  inputList: '.popup__input',
-  buttonElement: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-}*/
 
 //POPUP
 const popup = document.querySelector(".popup")
@@ -56,6 +47,7 @@ const closePopupTarget = (evt) => {
   }
 };
 
+
 //функция закрытия всех попапов по оверлэй
 const closePopupOverlay = () => {
   const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -76,6 +68,7 @@ function deletePhoto(evt) {
 function likePhoto(evt) {
   evt.target.classList.toggle("photo-grid__like_active");
 }
+
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -109,6 +102,15 @@ function addCard(src, name) {
 //ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
+ if (popup.classList.contains('popup_opened')) {
+  enableValidation(validationSettings);
+} else {
+  const formElement = document.querySelector('.popup__form');
+  formElement.reset();
+   //обновляем кнопку submit
+  cleanInputErrorValidation(popup, validationSettings); 
+}
+//удаляем клас при клике на overlay
  popup.addEventListener('click',closePopupTarget);
 }
 
@@ -125,12 +127,9 @@ function closePopupByEsqButton(evt) {
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
- // evt.preventDefault();  
- // popupFullPhotos.classList.add("popup_opened");
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
-  //отменяет стандартную отправку формы.
   // Закрываем попап
 togglePopup(popupFull);
 }
@@ -147,10 +146,8 @@ function submitHandlerForm(evt) {
 
   evt.preventDefault(); //отменяет стандартную отправку формы.
   // Получите значение полей jobInput и nameInput из свойства value
-   
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  
   // Закрываем попап
   togglePopup(popupUser); 
  
@@ -176,16 +173,14 @@ function submitPhotoForm(evt) {
 };
   insertCard(cardAddedByUser);
   photoName.value = "";
-  photoLink.value = "";
+  photoLink.value = ""; 
 }
 
 
 // Закрываем попап по нажатию Escape
-//const popupOpened = document.querySelector(".popup_opened");
 function keyHandler(evt) {
   if (evt.key === 'Escape') {
     togglePopup(popupUser);
-    //togglePopup(popupPhotos);
   }
 };
 
@@ -205,4 +200,3 @@ photoContainer.addEventListener("submit", submitHandlerFormPhoto);
 userContainer.addEventListener('keydown', keyHandler);
 
 document.addEventListener('keydown', closePopupByEsqButton);
-
