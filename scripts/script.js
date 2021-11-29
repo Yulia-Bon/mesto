@@ -107,10 +107,8 @@ function togglePopup(popup) {
 } else {
   const formElement = document.querySelector('.popup__form');
   formElement.reset();
-   //обновляем кнопку submit
   cleanInputErrorValidation(popup, validationSettings); 
 }
-//удаляем клас при клике на overlay
  popup.addEventListener('click',closePopupTarget);
 }
 
