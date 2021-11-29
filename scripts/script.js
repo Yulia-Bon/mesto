@@ -1,6 +1,5 @@
-
 //POPUP
-const popup = document.querySelector(".popup")
+const popup = document.querySelector(".popup");
 const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
 const popupFull = document.querySelector(".popup-fullscreen");
@@ -18,7 +17,7 @@ const buttonAdd = document.querySelector(".profile__add-button");
 const userContainer = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
 // поля формы в DOM
 const nameInput = document.querySelector(".popup-user__input-name");
-const jobInput = document.querySelector(".popup-user__input_type_job"); 
+const jobInput = document.querySelector(".popup-user__input_type_job");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
@@ -33,29 +32,24 @@ const photoContainer = document.querySelector(".popup-photos__container");
 const popupFullImage = document.querySelector(".popup__image");
 const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
-
 //Добавить разметку карточки
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
 
-
-
 //функция закрытия попапов по оверлэй
 const closePopupTarget = (evt) => {
-  if(evt.target === evt.currentTarget) {
-    evt.currentTarget.classList.remove('popup_opened');
+  if (evt.target === evt.currentTarget) {
+    evt.currentTarget.classList.remove("popup_opened");
   }
 };
 
-
 //функция закрытия всех попапов по оверлэй
 const closePopupOverlay = () => {
-  const popupList = Array.from(document.querySelectorAll('.popup'));
+  const popupList = Array.from(document.querySelectorAll(".popup"));
   popupList.forEach((popup) => {
-  popup.addEventListener('click', closePopupTarget);
+    popup.addEventListener("click", closePopupTarget);
   });
 };
-
 
 //УДАЛИТЬ КАРТОЧКУ
 function deletePhoto(evt) {
@@ -63,12 +57,10 @@ function deletePhoto(evt) {
   cardToDelete.remove();
 }
 
-
 // ФУНКЦИЯ ДЛЯ ЛАЙКА
 function likePhoto(evt) {
   evt.target.classList.toggle("photo-grid__like_active");
 }
-
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -81,10 +73,11 @@ function insertCard(card) {
 }
 
 function addCard(src, name) {
-  
   const cardItem = cardTemplate.cloneNode(true);
   const buttonLikePhoto = cardItem.querySelector(".photo-grid__like");
-  const buttonDeletePhoto = cardItem.querySelector(".photo-grid__delete-button");
+  const buttonDeletePhoto = cardItem.querySelector(
+    ".photo-grid__delete-button"
+  );
   const picPhotoGrid = cardItem.querySelector(".photo-grid__pic");
 
   picPhotoGrid.src = src;
@@ -95,33 +88,32 @@ function addCard(src, name) {
   buttonDeletePhoto.addEventListener("click", deletePhoto);
   buttonLikePhoto.addEventListener("click", likePhoto);
 
-  return cardItem; 
+  return cardItem;
 }
-
 
 // =(((
 function togglePopup(popup) {
- popup.classList.toggle("popup_opened");
- if (popup.classList.contains('popup_opened')) {
-  enableValidation(validationSettings);
-} else {
-  const formElement = document.querySelector('.popup__form');
-  formElement.reset();
-  cleanInputErrorValidation(popup, validationSettings); 
-}
- popup.addEventListener('click',closePopupTarget);
+  popup.classList.toggle("popup_opened");
+
+  if (popup.classList.contains("popup_opened")) {
+    enableValidation(validationSettings);
+  } 
+  else {
+    const formElement = document.querySelector(".popup__form");
+    formElement.reset();
+    cleanInputErrorValidation(popup, validationSettings);
+  }
+  popup.addEventListener("click", closePopupTarget);
 }
 
-
- //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
+//ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
 function closePopupByEsqButton(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
+  const popupOpened = document.querySelector(".popup_opened");
+  if (evt.key === "Escape") {
     togglePopup(popupOpened);
   }
   return;
 }
-
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
@@ -129,28 +121,24 @@ function handlerFullFormSubmit(evt) {
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
   // Закрываем попап
-togglePopup(popupFull);
+  togglePopup(popupFull);
 }
-
 
 //ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-const editProfile = function(evt) {
-togglePopup(popupUser);  
-nameInput.value = profileName.textContent;
-jobInput.value = profileJob.textContent;
-}
+const editProfile = function (evt) {
+  togglePopup(popupUser);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+};
 
 function submitHandlerForm(evt) {
-
   evt.preventDefault(); //отменяет стандартную отправку формы.
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   // Закрываем попап
-  togglePopup(popupUser); 
- 
+  togglePopup(popupUser);
 }
-
 
 // ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
 // Обработчик «отправки» формы
@@ -162,26 +150,23 @@ function submitHandlerFormPhoto(evt) {
   togglePopup(popupPhotos);
 }
 
-
 // ФУНКЦИЯ сабмит добавления карточки
 function submitPhotoForm(evt) {
   const cardAddedByUser = {
     name: photoName.value,
     link: photoLink.value,
-};
+  };
   insertCard(cardAddedByUser);
   photoName.value = "";
-  photoLink.value = ""; 
+  photoLink.value = "";
 }
-
 
 // Закрываем попап по нажатию Escape
 function keyHandler(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === "Escape") {
     togglePopup(popupUser);
   }
-};
-
+}
 
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
@@ -190,11 +175,11 @@ fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull));
 photoButtonClosePopup.addEventListener("click", () => togglePopup(popupPhotos));
 buttonAdd.addEventListener("click", () => togglePopup(popupPhotos));
 userButtonClosePopup.addEventListener("click", () => togglePopup(popupUser));
-buttonEdit.addEventListener("click",editProfile, () => togglePopup(popupUser), );
+buttonEdit.addEventListener("click", editProfile, () => togglePopup(popupUser));
 
 userContainer.addEventListener("submit", submitHandlerForm);
 photoContainer.addEventListener("submit", submitHandlerFormPhoto);
 
-userContainer.addEventListener('keydown', keyHandler);
+userContainer.addEventListener("keydown", keyHandler);
 
-document.addEventListener('keydown', closePopupByEsqButton);
+document.addEventListener("keydown", closePopupByEsqButton);
