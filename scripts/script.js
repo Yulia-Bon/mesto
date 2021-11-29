@@ -99,7 +99,7 @@ function addCard(src, name) {
 }
 
 
-//ОДИН ПОПАП, ЧТОБЫ ПРАВИТЬ ВСЕМИ
+// =(((
 function togglePopup(popup) {
  popup.classList.toggle("popup_opened");
  if (popup.classList.contains('popup_opened')) {
