@@ -41,16 +41,6 @@ const popupFormProfile = document.querySelector('.popup-user__form');
 const popupFormPhoto = document.querySelector('.popup-photos__form');
 
 
-
-
-
-
-
-
-
-
-
-
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsqButton);
@@ -111,25 +101,34 @@ function likePhoto(evt) {
 }
 
 
+function submitHandlerFormPhoto(evt) {
+  // отменяет стандартную отправку формы
+  evt.preventDefault();
+  submitPhotoForm(evt);
+  // Закрываем попап
+  closePopup(popupPhotos);
+}
 
-function handleOpenAddCardPopup () {
-  photoName.value = '';
-  photoLink.value = '';
-  cleanInputErrorValidation(popupPhotos, validationSettings); 
-  updatePopupSubmitButtonState(popupPhotos);
+
+// ФУНКЦИЯ сабмит добавления карточки
+function submitPhotoForm(evt) {
+  const cardAddedByUser = {
+    name: photoName.value,
+    link: photoLink.value,
+  };
+  insertCard(cardAddedByUser);
+  photoName.value = "";
+  photoLink.value = "";
   openPopup(popupPhotos);
 }
 
 
-function elementsInfoEdit (event) {
-  event.preventDefault();
-  const photoCard = addCard({
-    name: photoName.value,
-    link: photoLink.value, 
-  });
-  insertCard(photoCard);
-  closePopup(popupPhotos);
+//обновление состояния кнопки submit при открытии попапа добавления карточки и я чуть не сдохла пока делала
+function handleOpenAddCardPopup () {
+  updatePopupSubmitButtonState(popupPhotos);
+  openPopup(popupPhotos);
 }
+
 
 
 //функция закрытия попапов по оверлэй 
@@ -140,13 +139,13 @@ const closePopupTarget = (evt) => {
 };
 
 
-
+// ф-я для передачи ссылки и подписи при открытии фуллскрин попапа
 function handlerFullFormSubmit(evt) {
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
   // Закрываем попап
- openPopup(popupFull);
+  openPopup(popupFull);
 }
 
 
@@ -157,8 +156,10 @@ function handleOpenProfilePopup () {
   jobInput.value = profileJob.textContent; 
 };
 
-
+//передаётся значения в поле профиля
 function  profileInfoEdit (evt) {
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
   closePopup(popupUser);
   evt.preventDefault();
 }
@@ -175,24 +176,6 @@ function closePopupByEsqButton(evt) {
 }
 
 
-/*
-function submitPhotoForm(evt) {
-  const cardAddedByUser = {
-    name: photoName.value,
-    link: photoLink.value,
-  };
-  insertCard(cardAddedByUser);
-  photoName.value = "";
-  photoLink.value = "";
-  cleanInputErrorValidation(popupPhotos, validationSettings);
-  openPopup(popupElements);
-}
-
-*/
-
-
-
-
 buttonEdit.addEventListener('click', handleOpenProfilePopup);
 userButtonClosePopup.addEventListener('click', () => closePopup(popupUser));
 buttonAdd.addEventListener('click', handleOpenAddCardPopup);
@@ -204,7 +187,7 @@ popupPhotos.addEventListener('click', closePopupTarget);
 popupFull.addEventListener('click', closePopupTarget);
 
 popupFormProfile.addEventListener('submit', profileInfoEdit);
-popupFormPhoto.addEventListener('submit', elementsInfoEdit);
+popupFormPhoto.addEventListener('submit',submitHandlerFormPhoto );
 
 enableValidation(validationSettings);
 

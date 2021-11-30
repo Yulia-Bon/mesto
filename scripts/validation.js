@@ -29,14 +29,6 @@ const hideInputError = (validationSettings, formElement, inputElement) => {
   errorElement.textContent = '';
 };
 
-const cleanInputErrorValidation = (popup, validationSettings) => {
-  const formElement = popup.querySelector(validationSettings.formSelector);
-  const inputList = popup.querySelectorAll(validationSettings.inputList);
-  inputList.forEach((inputElement) => {
-    hideInputError(validationSettings, formElement, inputElement);
-  })
-};
-
 
 // функция для проверки на валидность инпутов
 const isValid = (validationSettings, formElement, inputElement) => {
