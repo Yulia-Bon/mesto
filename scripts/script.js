@@ -1,4 +1,6 @@
 //POPUP
+
+const popupList = Array.from(document.querySelectorAll('.popup'));
 const popup = document.querySelector(".popup");
 const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
@@ -123,7 +125,7 @@ function submitPhotoForm(evt) {
 }
 
 
-//обновление состояния кнопки submit при открытии попапа добавления карточки и я чуть не сдохла пока делала
+//обновление состояния кнопки submit при открытии попапа добавления карточки
 function handleOpenAddCardPopup () {
   updatePopupSubmitButtonState(popupPhotos);
   openPopup(popupPhotos);
@@ -134,7 +136,7 @@ function handleOpenAddCardPopup () {
 //функция закрытия попапов по оверлэй 
 const closePopupTarget = (evt) => { 
   if (evt.target === evt.currentTarget) { 
-    evt.currentTarget.classList.remove("popup_opened"); 
+    closePopup(evt.target);
   } 
 };
 
@@ -176,18 +178,29 @@ function closePopupByEsqButton(evt) {
 }
 
 
-buttonEdit.addEventListener('click', handleOpenProfilePopup);
-userButtonClosePopup.addEventListener('click', () => closePopup(popupUser));
-buttonAdd.addEventListener('click', handleOpenAddCardPopup);
-photoButtonClosePopup.addEventListener('click', () => closePopup(popupPhotos));
-fullButtonClosePopup.addEventListener('click', () => closePopup(popupFull));
+popupList.forEach((popup) => {
+  popup.addEventListener('click', function(evt){
+    if(evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')){
+      const popupElement = evt.target.closest('.popup');
+      closePopup(popupElement);
+    }
+  });
+})
 
-popupUser.addEventListener('click', closePopupTarget);
-popupPhotos.addEventListener('click', closePopupTarget);
-popupFull.addEventListener('click', closePopupTarget);
+buttonEdit.addEventListener('click', handleOpenProfilePopup);
+buttonAdd.addEventListener('click', handleOpenAddCardPopup);
 
 popupFormProfile.addEventListener('submit', profileInfoEdit);
 popupFormPhoto.addEventListener('submit',submitHandlerFormPhoto );
 
 enableValidation(validationSettings);
 
+
+
+//userButtonClosePopup.addEventListener('click', () => closePopup(popupUser));
+//photoButtonClosePopup.addEventListener('click', () => closePopup(popupPhotos));
+//fullButtonClosePopup.addEventListener('click', () => closePopup(popupFull));
+
+//popupUser.addEventListener('click', closePopupTarget);
+//popupPhotos.addEventListener('click', closePopupTarget);
+//popupFull.addEventListener('click', closePopupTarget);
