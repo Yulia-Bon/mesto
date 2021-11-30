@@ -181,8 +181,7 @@ function closePopupByEsqButton(evt) {
 popupList.forEach((popup) => {
   popup.addEventListener('click', function(evt){
     if(evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')){
-      const popupElement = evt.target.closest('.popup');
-      closePopup(popupElement);
+      closePopup(popup);
     }
   });
 })
