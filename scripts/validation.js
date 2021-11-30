@@ -60,26 +60,38 @@ const hasInvalidInput = (inputList) => {
 const setEventListeners = (formElement, validationSettings) => {
   const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputList));
   const buttonElement = formElement.querySelector(validationSettings.buttonElement);
-  toggleButtonState(validationSettings, inputList, buttonElement);
+  updateButtonState(validationSettings, inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(validationSettings, formElement, inputElement);
-      toggleButtonState(validationSettings, inputList, buttonElement);
+      updateButtonState(validationSettings, inputList, buttonElement);
     });
   });
 };
 
 
-const toggleButtonState = (validationSettings, inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(validationSettings.inactiveButtonClass);
-  } else {
-    buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove(validationSettings.inactiveButtonClass);
-  }
+const updatePopupSubmitButtonState = (popup) => {
+  const formElement = popup.querySelector(validationSettings.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputList));
+  const buttonElement = formElement.querySelector(validationSettings.buttonElement);
+  updateButtonState(validationSettings, inputList, buttonElement);
 }
 
+const updateButtonState = (validationSettings, inputList, buttonElement) => {
+  const validationResult =  hasInvalidInput(inputList);
+  setButtonDisabledState(validationSettings, buttonElement, validationResult);
+}
+
+
+const setButtonDisabledState = (validationSettings, buttonElement, newState) => {
+  if (newState) {
+    buttonElement.classList.add(validationSettings.inactiveButtonClass);
+    buttonElement.disabled = true
+  } else {
+    buttonElement.classList.remove(validationSettings.inactiveButtonClass);
+    buttonElement.disabled = false;
+  }
+}
 
 const enableValidation = (validationSettings) => {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));

@@ -36,35 +36,34 @@ const popupFullFigcaption = document.querySelector(".popup__figcaption");
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
 
-//функция закрытия попапов по оверлэй
-const closePopupTarget = (evt) => {
-  if (evt.target === evt.currentTarget) {
-    evt.currentTarget.classList.remove("popup_opened");
-  }
-};
+
+const popupFormProfile = document.querySelector('.popup-user__form');
+const popupFormPhoto = document.querySelector('.popup-photos__form');
 
 
-//УДАЛИТЬ КАРТОЧКУ
-function deletePhoto(evt) {
-  const cardToDelete = evt.target.closest(".photo-grid__item");
-  cardToDelete.remove();
+
+
+
+
+
+
+
+
+
+
+const openPopup = function (popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsqButton);
+
 }
 
-// ФУНКЦИЯ ДЛЯ ЛАЙКА
-function likePhoto(evt) {
-  evt.target.classList.toggle("photo-grid__like_active");
+const closePopup = function (popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsqButton);
 }
 
-//Вывести карточки на страницу
-initialCards.forEach(function (item) {
-  insertCard(item);
-});
 
-function insertCard(card) {
-  const photoCard = addCard(card.link, card.name);
-  cardList.prepend(photoCard);
-}
-
+//ДОБАВИТЬ КАРТОЧКИ НА СТРАНИЦУ
 function addCard(src, name) {
   const cardItem = cardTemplate.cloneNode(true);
   const buttonLikePhoto = cardItem.querySelector(".photo-grid__like");
@@ -84,69 +83,99 @@ function addCard(src, name) {
 
 
 
-// =(((
-function togglePopup(popup) {
-  popup.classList.toggle("popup_opened");
+function insertCard(card) {
+  const photoCard = addCard(card.link, card.name);
+  cardList.prepend(photoCard);
+}
 
-  if (popup.classList.contains("popup_opened")) {
-    enableValidation(validationSettings);
+
+
+//Вывести карточки на страницу
+initialCards.forEach(function (item) {
+  insertCard(item);
+});
+
+
+
+//УДАЛИТЬ КАРТОЧКУ
+function deletePhoto(evt) {
+  const cardToDelete = evt.target.closest(".photo-grid__item");
+  cardToDelete.remove();
+}
+
+
+
+// ФУНКЦИЯ ДЛЯ ЛАЙКА
+function likePhoto(evt) {
+  evt.target.classList.toggle("photo-grid__like_active");
+}
+
+
+
+function handleOpenAddCardPopup () {
+  photoName.value = '';
+  photoLink.value = '';
+  cleanInputErrorValidation(popupPhotos, validationSettings); 
+  updatePopupSubmitButtonState(popupPhotos);
+  openPopup(popupPhotos);
+}
+
+
+function elementsInfoEdit (event) {
+  event.preventDefault();
+  const photoCard = addCard({
+    name: photoName.value,
+    link: photoLink.value, 
+  });
+  insertCard(photoCard);
+  closePopup(popupPhotos);
+}
+
+
+//функция закрытия попапов по оверлэй 
+const closePopupTarget = (evt) => { 
+  if (evt.target === evt.currentTarget) { 
+    evt.currentTarget.classList.remove("popup_opened"); 
   } 
-  else {
-    const formElement = document.querySelector(".popup__form");
-    formElement.reset();
-    cleanInputErrorValidation(popup, validationSettings);
-  }
-  popup.addEventListener("click", closePopupTarget);
-  document.addEventListener('keydown',closePopupByEsqButton);
-}
-
-//ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
-function closePopupByEsqButton(evt) {
-  const popupOpened = document.querySelector(".popup_opened");
-  if (evt.key === "Escape") {
-    togglePopup(popupOpened);
-  }
-  return;
-}
+};
 
 
 
-// Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
   popupFullImage.src = evt.target.src;
   popupFullImage.alt = evt.target.alt;
   popupFullFigcaption.textContent = evt.target.alt;
   // Закрываем попап
-  togglePopup(popupFull);
+ openPopup(popupFull);
 }
 
-//ФУНКЦИИ ДЛЯ РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-const editProfile = function (evt) {
-  togglePopup(popupUser);
+
+
+function handleOpenProfilePopup () {
+  openPopup(popupUser);
   nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  jobInput.value = profileJob.textContent; 
 };
 
-function submitHandlerForm(evt) {
-  evt.preventDefault(); //отменяет стандартную отправку формы.
-  // Получите значение полей jobInput и nameInput из свойства value
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  // Закрываем попап
-  togglePopup(popupUser);
-}
 
-// ФУНКЦИИ ДЛЯ ПОПАПА ГАЛЕРЕИ
-// Обработчик «отправки» формы
-function submitHandlerFormPhoto(evt) {
-  // отменяет стандартную отправку формы
+function  profileInfoEdit (evt) {
+  closePopup(popupUser);
   evt.preventDefault();
-  submitPhotoForm(evt);
-  // Закрываем попап
-  togglePopup(popupPhotos);
 }
 
-// ФУНКЦИЯ сабмит добавления карточки
+
+
+//ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
+function closePopupByEsqButton(evt) {
+  const popupOpened = document.querySelector(".popup_opened");
+  if (evt.key === "Escape") {
+    closePopup(popupOpened);
+  }
+  return;
+}
+
+
+/*
 function submitPhotoForm(evt) {
   const cardAddedByUser = {
     name: photoName.value,
@@ -155,17 +184,27 @@ function submitPhotoForm(evt) {
   insertCard(cardAddedByUser);
   photoName.value = "";
   photoLink.value = "";
+  cleanInputErrorValidation(popupPhotos, validationSettings);
+  openPopup(popupElements);
 }
 
+*/
 
-// Прикрепляем обработчики к формам:
-// они будет следить за событиеми “submit” - «отправка» и "click"
-fullButtonClosePopup.addEventListener("click", () => togglePopup(popupFull));
-//buttonEdit.addEventListener('click', editProfile);
-photoButtonClosePopup.addEventListener("click", () => togglePopup(popupPhotos));
-buttonAdd.addEventListener("click", () => togglePopup(popupPhotos));
-userButtonClosePopup.addEventListener("click", () => togglePopup(popupUser));
-buttonEdit.addEventListener("click", editProfile, () => togglePopup(popupUser));
 
-userContainer.addEventListener("submit", submitHandlerForm);
-photoContainer.addEventListener("submit", submitHandlerFormPhoto);
+
+
+buttonEdit.addEventListener('click', handleOpenProfilePopup);
+userButtonClosePopup.addEventListener('click', () => closePopup(popupUser));
+buttonAdd.addEventListener('click', handleOpenAddCardPopup);
+photoButtonClosePopup.addEventListener('click', () => closePopup(popupPhotos));
+fullButtonClosePopup.addEventListener('click', () => closePopup(popupFull));
+
+popupUser.addEventListener('click', closePopupTarget);
+popupPhotos.addEventListener('click', closePopupTarget);
+popupFull.addEventListener('click', closePopupTarget);
+
+popupFormProfile.addEventListener('submit', profileInfoEdit);
+popupFormPhoto.addEventListener('submit', elementsInfoEdit);
+
+enableValidation(validationSettings);
+
