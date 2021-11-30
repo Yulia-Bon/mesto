@@ -43,13 +43,6 @@ const closePopupTarget = (evt) => {
   }
 };
 
-//функция закрытия всех попапов по оверлэй
-const closePopupOverlay = () => {
-  const popupList = Array.from(document.querySelectorAll(".popup"));
-  popupList.forEach((popup) => {
-    popup.addEventListener("click", closePopupTarget);
-  });
-};
 
 //УДАЛИТЬ КАРТОЧКУ
 function deletePhoto(evt) {
@@ -75,9 +68,7 @@ function insertCard(card) {
 function addCard(src, name) {
   const cardItem = cardTemplate.cloneNode(true);
   const buttonLikePhoto = cardItem.querySelector(".photo-grid__like");
-  const buttonDeletePhoto = cardItem.querySelector(
-    ".photo-grid__delete-button"
-  );
+  const buttonDeletePhoto = cardItem.querySelector(".photo-grid__delete-button");
   const picPhotoGrid = cardItem.querySelector(".photo-grid__pic");
 
   picPhotoGrid.src = src;
@@ -90,6 +81,8 @@ function addCard(src, name) {
 
   return cardItem;
 }
+
+
 
 // =(((
 function togglePopup(popup) {
@@ -104,6 +97,7 @@ function togglePopup(popup) {
     cleanInputErrorValidation(popup, validationSettings);
   }
   popup.addEventListener("click", closePopupTarget);
+  document.addEventListener('keydown',closePopupByEsqButton);
 }
 
 //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
@@ -114,6 +108,8 @@ function closePopupByEsqButton(evt) {
   }
   return;
 }
+
+
 
 // Обработчик «отправки» формы
 function handlerFullFormSubmit(evt) {
@@ -161,12 +157,6 @@ function submitPhotoForm(evt) {
   photoLink.value = "";
 }
 
-// Закрываем попап по нажатию Escape
-function keyHandler(evt) {
-  if (evt.key === "Escape") {
-    togglePopup(popupUser);
-  }
-}
 
 // Прикрепляем обработчики к формам:
 // они будет следить за событиеми “submit” - «отправка» и "click"
@@ -179,7 +169,3 @@ buttonEdit.addEventListener("click", editProfile, () => togglePopup(popupUser));
 
 userContainer.addEventListener("submit", submitHandlerForm);
 photoContainer.addEventListener("submit", submitHandlerFormPhoto);
-
-userContainer.addEventListener("keydown", keyHandler);
-
-document.addEventListener("keydown", closePopupByEsqButton);
