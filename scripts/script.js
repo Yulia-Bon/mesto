@@ -1,3 +1,58 @@
+
+import {Cards} from './cards.js';
+import {FormValidator,updatePopupSubmitButtonState} from './validation.js';
+
+
+//Добавить разметку карточки
+const cardTemplate = document.querySelector("#photos-element").content;
+const cardList = document.querySelector(".photo-grid");
+
+
+
+
+
+
+
+
+
+
+
+
+
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputList: '.popup__input',
+  buttonElement: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
 //POPUP
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -35,15 +90,24 @@ const popupFullImage = document.querySelector(".popup__image");
 const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
 //Добавить разметку карточки
-const cardTemplate = document.querySelector("#photos-element").content;
-const cardList = document.querySelector(".photo-grid");
+//const cardTemplate = document.querySelector("#photos-element").content;
+//const cardList = document.querySelector(".photo-grid");
 
 
 const popupFormProfile = document.querySelector('.popup-user__form');
 const popupFormPhoto = document.querySelector('.popup-photos__form');
 
 
-const openPopup = function (popup) {
+function handleOpenAddCardPopup () {
+  updatePopupSubmitButtonState(popupPhotos);
+  openPopup(popupPhotos);
+}
+
+
+
+
+
+export const openPopup = function (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsqButton);
 
@@ -55,32 +119,15 @@ const closePopup = function (popup) {
 }
 
 
-//ДОБАВИТЬ КАРТОЧКИ НА СТРАНИЦУ
-function addCard(src, name) {
-  const cardItem = cardTemplate.cloneNode(true);
-  const buttonLikePhoto = cardItem.querySelector(".photo-grid__like");
-  const buttonDeletePhoto = cardItem.querySelector(".photo-grid__delete-button");
-  const picPhotoGrid = cardItem.querySelector(".photo-grid__pic");
-
-  picPhotoGrid.src = src;
-  picPhotoGrid.alt = name;
-
-  cardItem.querySelector(".photo-grid__title").textContent = name;
-  picPhotoGrid.addEventListener("click", handlerFullFormSubmit);
-  buttonDeletePhoto.addEventListener("click", deletePhoto);
-  buttonLikePhoto.addEventListener("click", likePhoto);
-
-  return cardItem;
-}
 
 
 
 function insertCard(card) {
-  const photoCard = addCard(card.link, card.name);
+  const cardsh= new Cards(card.name, card.link, cardTemplate);
+ 
+  const photoCard = cardsh.generateCard();
   cardList.prepend(photoCard);
 }
-
-
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -89,18 +136,9 @@ initialCards.forEach(function (item) {
 
 
 
-//УДАЛИТЬ КАРТОЧКУ
-function deletePhoto(evt) {
-  const cardToDelete = evt.target.closest(".photo-grid__item");
-  cardToDelete.remove();
-}
 
 
 
-// ФУНКЦИЯ ДЛЯ ЛАЙКА
-function likePhoto(evt) {
-  evt.target.classList.toggle("photo-grid__like_active");
-}
 
 
 function submitHandlerFormPhoto(evt) {
@@ -125,11 +163,7 @@ function submitPhotoForm(evt) {
 }
 
 
-//обновление состояния кнопки submit при открытии попапа добавления карточки
-function handleOpenAddCardPopup () {
-  updatePopupSubmitButtonState(popupPhotos);
-  openPopup(popupPhotos);
-}
+
 
 
 
@@ -141,14 +175,6 @@ const closePopupTarget = (evt) => {
 };
 
 
-// ф-я для передачи ссылки и подписи при открытии фуллскрин попапа
-function handlerFullFormSubmit(evt) {
-  popupFullImage.src = evt.target.src;
-  popupFullImage.alt = evt.target.alt;
-  popupFullFigcaption.textContent = evt.target.alt;
-  // Закрываем попап
-  openPopup(popupFull);
-}
 
 
 
@@ -187,12 +213,19 @@ popupList.forEach((popup) => {
 })
 
 buttonEdit.addEventListener('click', handleOpenProfilePopup);
-buttonAdd.addEventListener('click', handleOpenAddCardPopup);
+//
 
 popupFormProfile.addEventListener('submit', profileInfoEdit);
 popupFormPhoto.addEventListener('submit',submitHandlerFormPhoto );
+buttonAdd.addEventListener('click', handleOpenAddCardPopup);
 
-enableValidation(validationSettings);
+/*
+const formProfileValidation = new FormValidator(validationSettings, popupFormProfile);
+formProfileValidation.enableValidation();
+
+const addPhotoFormValidator = new FormValidator(validationSettings, popupFormPhoto);
+addPhotoFormValidator.enableValidation();
+*/
 
 
 
@@ -203,3 +236,10 @@ enableValidation(validationSettings);
 //popupUser.addEventListener('click', closePopupTarget);
 //popupPhotos.addEventListener('click', closePopupTarget);
 //popupFull.addEventListener('click', closePopupTarget);
+
+
+const formProfileValidation = new FormValidator(validationSettings, popupFormProfile );
+formProfileValidation.enableValidation();
+
+const formAddCardValidation = new FormValidator(validationSettings, popupFormPhoto);
+formAddCardValidation.enableValidation();

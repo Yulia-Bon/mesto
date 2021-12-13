@@ -1,47 +1,74 @@
 
+
+
+const popupFormProfile = document.querySelector('.popup-user__form');
+const popupFormPhoto = document.querySelector('.popup-photos__form');
+
+
+
+
+
+
+
+
+
+
+
+
 //НЕОБХОДИМЫЕ НАСТРОЙКИ ДЛЯ ВАЛИДАЦИИ ФОРМ
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputList: '.popup__input',
-  buttonElement: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
+
+
+export class FormValidator{
+  constructor(config, formElement) {
+    this._config = config;
+    this._formSelector = config.formSelector;
+    this._inputList = config.inputList;
+    this._buttonElement = config.buttonElement;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass
+    this._formElement = formElement;
+    
+   // this._inputList = Array.from(form.querySelectorAll(config.inputSelector));
+   // this._submitButton = form.querySelector(config.submitButtonSelector);
 }
+
+
 
 
 // ПРОВЕРКА ВАЛИДНОСТИ ФОРМ
 
 //функция для отображения ошибки
-const showInputError = (validationSettings, formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(validationSettings.inputErrorClass);
+ _showInputError (inputElement) {
+  const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add(this._inputErrorClass);
+  
+  errorElement.classList.add(this._errorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(validationSettings.errorClass);
 };
 
 
 //функция для скрытия ошибки
-const hideInputError = (validationSettings, formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(validationSettings.inputErrorClass);
-  errorElement.classList.remove(validationSettings.errorClass);
+ _hideInputError (inputElement) {
+  const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove(this._inputErrorClass);
+  errorElement.classList.remove(this._errorClass);
   errorElement.textContent = '';
 };
 
 
 // функция для проверки на валидность инпутов
-const isValid = (validationSettings, formElement, inputElement) => {
+ _isValid (inputElement) {
   if (!inputElement.validity.valid) {
-    showInputError(validationSettings, formElement, inputElement, inputElement.validationMessage);
+    this._showInputError(inputElement, errorElement);
   } else {
-    hideInputError(validationSettings, formElement, inputElement);
+    this._hideInputError(inputElement);
   }
 };
 
 
 // ПРОВЕРКА ВАЛИДНОСТИ ФОРМЫ PROFILE 
-const hasInvalidInput = (inputList) => {
+ _hasInvalidInput (inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   })
@@ -49,48 +76,61 @@ const hasInvalidInput = (inputList) => {
 
 
 // функция для установки слушателей проверки на валидность инпутов
-const setEventListeners = (formElement, validationSettings) => {
-  const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputList));
-  const buttonElement = formElement.querySelector(validationSettings.buttonElement);
-  updateButtonState(validationSettings, inputList, buttonElement);
+ _setEventListeners () {
+  const inputList = Array.from(this._formElement.querySelectorAll(this._inputList));
+  const buttonElement = this._formElement.querySelector(this._buttonElement);
+  this._updateButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(validationSettings, formElement, inputElement);
-      updateButtonState(validationSettings, inputList, buttonElement);
+      this._isValid(inputElement);
+      this._updateButtonState(inputList, buttonElement);
     });
   });
 };
 
 
-const updatePopupSubmitButtonState = (popup) => {
-  const formElement = popup.querySelector(validationSettings.formSelector);
-  const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputList));
-  const buttonElement = formElement.querySelector(validationSettings.buttonElement);
-  updateButtonState(validationSettings, inputList, buttonElement);
-}
 
-const updateButtonState = (validationSettings, inputList, buttonElement) => {
-  const validationResult =  hasInvalidInput(inputList);
-  setButtonDisabledState(validationSettings, buttonElement, validationResult);
+
+ _updateButtonState (inputList, buttonElement) {
+  const validationResult =  this._hasInvalidInput(inputList);
+  this._setButtonDisabledState(buttonElement, validationResult);
 }
 
 
-const setButtonDisabledState = (validationSettings, buttonElement, newState) => {
+_setButtonDisabledState (buttonElement, newState) {
   if (newState) {
-    buttonElement.classList.add(validationSettings.inactiveButtonClass);
+    buttonElement.classList.add(this._config.inactiveButtonClass);
     buttonElement.disabled = true
   } else {
-    buttonElement.classList.remove(validationSettings.inactiveButtonClass);
+    buttonElement.classList.remove(this._config.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 }
 
-const enableValidation = (validationSettings) => {
-  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+enableValidation () {
+  const formList = Array.from(document.querySelectorAll(this._formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement, validationSettings);
+    this._setEventListeners(formElement);
   });
 };
+
+
+
+
+}
+
+
+export const updatePopupSubmitButtonState = (popup) => {
+  const formElement = popup.querySelector(this._formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(this._inputList));
+  const buttonElement = formElement.querySelector(this._buttonElement);
+  updateButtonState(inputList, buttonElement);
+}
+
+//обновление состояния кнопки submit при открытии попапа добавления карточки
+
+
+
