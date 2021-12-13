@@ -1,23 +1,14 @@
-import {openPopup} from './script.js';
-
-//Массив с начальными карточками
+import { openPopup } from "./script.js";
 
 
-
-
-const popupFull = document.querySelector(".popup-fullscreen");
-// ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-const popupFullImage = document.querySelector(".popup__image");
-const popupFullFigcaption = document.querySelector(".popup__figcaption");
-
-
-export class Cards {
+export class Card {
   constructor(name, link, templateSelector, handlerOpenImage) {
     this._name = name;
     this._link = link;
     //this._handleOpenImage = handleOpenImage;
     this._templateSelector = templateSelector;
   }
+
   //добавить разметку
   _getTemplate() {
     this._cardTemplate = this._templateSelector;
@@ -37,11 +28,9 @@ export class Cards {
     this._elementImage.alt = this._name;
 
     this._element.querySelector(".photo-grid__title").textContent = this._name;
-    //this._element.querySelector('.photo-grid__pic').src = this._link;
+ 
     return this._element;
   }
-
-
 
   //УДАЛИТЬ КАРТОЧКУ
   _deletePhoto(evt) {
@@ -55,15 +44,17 @@ export class Cards {
   }
 
   // ф-я для передачи ссылки и подписи при открытии фуллскрин попапа
-_handlerFullFormSubmit(evt) {
+  _handlerFullFormSubmit(evt) {
+    // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
+    const popupFull = document.querySelector(".popup-fullscreen");
+    const popupFullImage = document.querySelector(".popup__image");
+    const popupFullFigcaption = document.querySelector(".popup__figcaption");
     popupFullImage.src = evt.target.src;
     popupFullImage.alt = evt.target.alt;
     popupFullFigcaption.textContent = evt.target.alt;
     // Закрываем попап
     openPopup(popupFull);
   }
-
-
 
   //слушатели
   _setEventListeners() {
@@ -84,14 +75,3 @@ _handlerFullFormSubmit(evt) {
       });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
