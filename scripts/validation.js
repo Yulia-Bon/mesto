@@ -1,23 +1,4 @@
-
-
-
-const popupFormProfile = document.querySelector('.popup-user__form');
-const popupFormPhoto = document.querySelector('.popup-photos__form');
-
-
-
-
-
-
-
-
-
-
-
-
 //НЕОБХОДИМЫЕ НАСТРОЙКИ ДЛЯ ВАЛИДАЦИИ ФОРМ
-
-
 export class FormValidator{
   constructor(config, formElement) {
     this._config = config;
@@ -28,43 +9,33 @@ export class FormValidator{
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass
     this._formElement = formElement;
-    
-   // this._inputList = Array.from(form.querySelectorAll(config.inputSelector));
-   // this._submitButton = form.querySelector(config.submitButtonSelector);
+}
+
+_getErrorElement(inputElement) {
+  return this._formElement.querySelector(`#${inputElement.id}-error`);
+}
+_showInputError(inputElement, validationMessage, errorElement) {
+  inputElement.classList.add(this._inputErrorClass);
+  errorElement.textContent = validationMessage;
+  errorElement.classList.add(this._errorClass);
 }
 
 
-
-
-// ПРОВЕРКА ВАЛИДНОСТИ ФОРМ
-
-//функция для отображения ошибки
- _showInputError (inputElement) {
-  const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(this._inputErrorClass);
-  
-  errorElement.classList.add(this._errorClass);
-  errorElement.textContent = errorMessage;
-};
-
-
-//функция для скрытия ошибки
- _hideInputError (inputElement) {
-  const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+_hideInputError(inputElement, errorElement) {
   inputElement.classList.remove(this._inputErrorClass);
-  errorElement.classList.remove(this._errorClass);
   errorElement.textContent = '';
-};
+  errorElement.classList.remove(this._errorClass);
+}
 
 
-// функция для проверки на валидность инпутов
- _isValid (inputElement) {
+_checkInputValidity(inputElement) {
+  const errorElement = this._getErrorElement(inputElement);
   if (!inputElement.validity.valid) {
-    this._showInputError(inputElement, errorElement);
+    this._showInputError(inputElement, inputElement.validationMessage, errorElement);
   } else {
-    this._hideInputError(inputElement);
+    this._hideInputError(inputElement, errorElement);
   }
-};
+}
 
 
 // ПРОВЕРКА ВАЛИДНОСТИ ФОРМЫ PROFILE 
@@ -82,13 +53,11 @@ export class FormValidator{
   this._updateButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      this._isValid(inputElement);
+      this._checkInputValidity(inputElement);
       this._updateButtonState(inputList, buttonElement);
     });
   });
 };
-
-
 
 
  _updateButtonState (inputList, buttonElement) {
@@ -117,20 +86,15 @@ enableValidation () {
   });
 };
 
-
-
-
 }
 
-
+/*
 export const updatePopupSubmitButtonState = (popup) => {
-  const formElement = popup.querySelector(this._formSelector);
+ // const formElement = popup.querySelector(this._formSelector);
   const inputList = Array.from(formElement.querySelectorAll(this._inputList));
-  const buttonElement = formElement.querySelector(this._buttonElement);
+  //const buttonElement = formElement.querySelector(this._buttonElement);
   updateButtonState(inputList, buttonElement);
 }
 
 //обновление состояния кнопки submit при открытии попапа добавления карточки
-
-
-
+*/

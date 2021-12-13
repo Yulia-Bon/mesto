@@ -1,20 +1,11 @@
 
 import {Cards} from './cards.js';
-import {FormValidator,updatePopupSubmitButtonState} from './validation.js';
+import {FormValidator/*,updatePopupSubmitButtonState*/} from './validation.js';
 
 
 //Добавить разметку карточки
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
-
-
-
-
-
-
-
-
-
 
 
 
@@ -98,8 +89,12 @@ const popupFormProfile = document.querySelector('.popup-user__form');
 const popupFormPhoto = document.querySelector('.popup-photos__form');
 
 
+
+
+
+
 function handleOpenAddCardPopup () {
-  updatePopupSubmitButtonState(popupPhotos);
+  /*updatePopupSubmitButtonState(popupPhotos);*/
   openPopup(popupPhotos);
 }
 
@@ -133,9 +128,6 @@ function insertCard(card) {
 initialCards.forEach(function (item) {
   insertCard(item);
 });
-
-
-
 
 
 
@@ -219,14 +211,6 @@ popupFormProfile.addEventListener('submit', profileInfoEdit);
 popupFormPhoto.addEventListener('submit',submitHandlerFormPhoto );
 buttonAdd.addEventListener('click', handleOpenAddCardPopup);
 
-/*
-const formProfileValidation = new FormValidator(validationSettings, popupFormProfile);
-formProfileValidation.enableValidation();
-
-const addPhotoFormValidator = new FormValidator(validationSettings, popupFormPhoto);
-addPhotoFormValidator.enableValidation();
-*/
-
 
 
 //userButtonClosePopup.addEventListener('click', () => closePopup(popupUser));
@@ -243,3 +227,5 @@ formProfileValidation.enableValidation();
 
 const formAddCardValidation = new FormValidator(validationSettings, popupFormPhoto);
 formAddCardValidation.enableValidation();
+
+
