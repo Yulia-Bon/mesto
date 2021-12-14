@@ -15,7 +15,6 @@ export class FormValidator {
     return this._formElement.querySelector(`#${inputElement.id}-error`);
   }
 
-
   //ПОКАЗАТЬ ОШИБКИ ВАЛИДАЦИИ
   _showInputError(inputElement, validationMessage, errorElement) {
     inputElement.classList.add(this._inputErrorClass);
@@ -23,14 +22,12 @@ export class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-
   //СКРЫТЬ ОШИБКИ ВАЛИДАЦИИ
   _hideInputError(inputElement, errorElement) {
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove(this._errorClass);
   }
-
 
   //ПРОВЕРИТЬ ВАЛИДАЦИЮ
   _checkInputValidity(inputElement) {
@@ -66,8 +63,10 @@ export class FormValidator {
         this._updateButtonState(inputList, buttonElement);
       });
     });
+    this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
   }
-
 
   //ИПОЛЬЗУЕТСЯ В SCRIPT.JS ДЛЯ ОБНОВЛЕНИЯ СОСТОЯНИИ КНОПКИ САБМИТ
   updatePopupSubmitButtonState() {
@@ -83,8 +82,6 @@ export class FormValidator {
     this._setButtonDisabledState(buttonElement, validationResult);
   }
 
-
-
   _setButtonDisabledState(buttonElement, newState) {
     if (newState) {
       buttonElement.classList.add(this._config.inactiveButtonClass);
@@ -95,15 +92,7 @@ export class FormValidator {
     }
   }
 
-
-
   enableValidation() {
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
-    formList.forEach((formElement) => {
-      formElement.addEventListener("submit", (evt) => {
-        evt.preventDefault();
-      });
-      this._setEventListeners(formElement);
-    });
+    this._setEventListeners();
   }
 }

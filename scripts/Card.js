@@ -1,14 +1,10 @@
-import { openPopup } from "./index.js";
-
-const popupFull = document.querySelector(".popup-fullscreen");
-const popupFullImage = document.querySelector(".popup__image");
-const popupFullFigcaption = document.querySelector(".popup__figcaption");
+//import { openPopup } from "./index.js";
 
 export class Card {
-  constructor(name, link, template, handlerOpenImage) {
+  constructor(name, link, template, handleOpenImage) {
     this._name = name;
     this._link = link;
-    //this._handleOpenImage = handleOpenImage;
+    this._handleOpenImage = handleOpenImage;
     this._template = template;
   }
 
@@ -16,7 +12,6 @@ export class Card {
   _getTemplate() {
     this._cardTemplate = this._template;
     this._cardItem = this._cardTemplate.cloneNode(true);
-
     return this._cardItem;
   }
 
@@ -24,14 +19,11 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-
     this._elementImage = this._cardItem.querySelector(".photo-grid__pic");
-
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
-
     this._element.querySelector(".photo-grid__title").textContent = this._name;
- 
+
     return this._element;
   }
 
@@ -44,16 +36,6 @@ export class Card {
   // ФУНКЦИЯ ДЛЯ ЛАЙКА
   _likePhoto(evt) {
     evt.target.classList.toggle("photo-grid__like_active");
-  }
-
-  // ф-я для передачи ссылки и подписи при открытии фуллскрин попапа
-  _handlerFullFormSubmit(evt) {
-    // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-    popupFullImage.src = evt.target.src;
-    popupFullImage.alt = evt.target.alt;
-    popupFullFigcaption.textContent = evt.target.alt;
-    // Закрываем попап
-    openPopup(popupFull);
   }
 
   //слушатели
@@ -70,8 +52,8 @@ export class Card {
       });
     this._element
       .querySelector(".photo-grid__pic")
-      .addEventListener("click", (evt) => {
-        this._handlerFullFormSubmit(evt);
+      .addEventListener("click", () => {
+        this._handleOpenImage(this._name, this._link);
       });
   }
 }
