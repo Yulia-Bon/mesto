@@ -1,6 +1,6 @@
 
-import {Card} from './cards.js';
-import {FormValidator} from './validation.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initCards.js';
 
 
@@ -44,13 +44,6 @@ const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 const popupFormProfile = document.querySelector('.popup-user__form');
 const popupFormPhoto = document.querySelector('.popup-photos__form');
 
-//Ф-Я ОБНОВЛЕНИЯ SubmitButton ДЛЯ ПОПАПА ФОТО
-function handleOpenAddCardPopup () {
-  const abd = new FormValidator(validationSettings, popupFormPhoto);
-  abd.updatePopupSubmitButtonState();
-  openPopup(popupPhotos);
-}
-
 //ОТКРЫТЬ ПОПАП
 export const openPopup = function (popup) {
   popup.classList.add('popup_opened');
@@ -64,13 +57,69 @@ const closePopup = function (popup) {
   document.removeEventListener('keydown', closePopupByEsqButton);
 }
 
+
+
 //ИНИЦИАЛИЗАЦИЯ КАРТОЧЕК
 function insertCard(card) {
   const cardsh= new Card(card.name, card.link, cardTemplate);
  
+  
   const photoCard = cardsh.generateCard();
   cardList.prepend(photoCard);
 }
+
+
+function createCard(item) {
+    // тут создаете карточку и возвращаете ее
+  return cardElement
+}
+
+
+
+
+
+
+
+
+
+//Ф-Я ИЗ РЕКОМЕНДАЦИЙ РУВЬЮВЕРА 
+
+function handlerOpenImage(name, link) {
+  insertCard(cardAddedByUser);
+  const cardAddedByUser = {
+    name: photoName.value,
+    link: photoLink.value,
+  };
+  openPopup(popup);
+
+
+ 
+ // устанавливаем ссылку
+  //устанавливаем подпись картинке
+  //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+}
+
+
+
+
+
+/*
+
+function renderCard(card){
+  elementsContainer.prepend(card);
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, cardTemplate ).generateCard();
+  renderCard(card);
+});
+*/
+
+
+
+
+
+
 
 //Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -84,6 +133,7 @@ function submitHandlerFormPhoto(evt) {
   submitPhotoForm(evt);
   // Закрываем попап
   closePopup(popupPhotos);
+
 }
 
 // ФУНКЦИЯ сабмит добавления карточки
@@ -123,8 +173,8 @@ function  profileInfoEdit (evt) {
 
 //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
 function closePopupByEsqButton(evt) {
-  const popupOpened = document.querySelector(".popup_opened");
   if (evt.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
   return;
@@ -139,6 +189,12 @@ popupList.forEach((popup) => {
   });
 })
 
+
+function handleOpenAddCardPopup () {
+formAddCardValidation.updatePopupSubmitButtonState()
+openPopup(popupPhotos)}
+
+
 //ОБРАБОТЧИКИ
 buttonEdit.addEventListener('click', handleOpenProfilePopup);
 popupFormProfile.addEventListener('submit', profileInfoEdit);
@@ -152,5 +208,3 @@ formProfileValidation.enableValidation();
 
 const formAddCardValidation = new FormValidator(validationSettings, popupFormPhoto);
 formAddCardValidation.enableValidation();
-
-

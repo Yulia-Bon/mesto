@@ -1,17 +1,20 @@
-import { openPopup } from "./script.js";
+import { openPopup } from "./index.js";
 
+const popupFull = document.querySelector(".popup-fullscreen");
+const popupFullImage = document.querySelector(".popup__image");
+const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
 export class Card {
-  constructor(name, link, templateSelector, handlerOpenImage) {
+  constructor(name, link, template, handlerOpenImage) {
     this._name = name;
     this._link = link;
     //this._handleOpenImage = handleOpenImage;
-    this._templateSelector = templateSelector;
+    this._template = template;
   }
 
   //добавить разметку
   _getTemplate() {
-    this._cardTemplate = this._templateSelector;
+    this._cardTemplate = this._template;
     this._cardItem = this._cardTemplate.cloneNode(true);
 
     return this._cardItem;
@@ -46,9 +49,6 @@ export class Card {
   // ф-я для передачи ссылки и подписи при открытии фуллскрин попапа
   _handlerFullFormSubmit(evt) {
     // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
-    const popupFull = document.querySelector(".popup-fullscreen");
-    const popupFullImage = document.querySelector(".popup__image");
-    const popupFullFigcaption = document.querySelector(".popup__figcaption");
     popupFullImage.src = evt.target.src;
     popupFullImage.alt = evt.target.alt;
     popupFullFigcaption.textContent = evt.target.alt;
