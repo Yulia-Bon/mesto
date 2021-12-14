@@ -63,7 +63,7 @@ function insertCard(card) {
   cardList.prepend(photoCard);
 }
 
-// тут создаете карточку и возвращаете ее а зачем
+// тут создаете карточку и возвращаете ее
 function createCard(item) {
   const cards = new Card(item.name, item.link, cardTemplate, handleOpenImage);
   const photo = cards.generateCard();
