@@ -37,25 +37,25 @@ const photoName = document.querySelector(".popup-photos__input-card-name");
 const photoLink = document.querySelector(".popup-photos__input_type_card-src");
 
 // ПЕРЕМЕННЫЕ ФУЛЛСКРИНА
-const popupFullImage = document.querySelector(".popup__image");
-const popupFullFigcaption = document.querySelector(".popup__figcaption");
+export const popupFullImage = document.querySelector(".popup__image");
+export const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
 //ФОРМЫ ПОПАПОВ
 const popupFormProfile = document.querySelector(".popup-user__form");
 const popupFormPhoto = document.querySelector(".popup-photos__form");
 const popupFull = document.querySelector(".popup-fullscreen");
 
-//ОТКРЫТЬ ПОПАП
-export const openPopup = function (popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closePopupByEsqButton);
-};
 
-//ЗАКРЫТЬ ПОПАП
-const closePopup = function (popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closePopupByEsqButton);
-};
+
+
+
+
+
+
+
+
+
+//ДЛЯ  СЕКТИОН
 
 //ИНИЦИАЛИЗАЦИЯ КАРТОЧЕК
 function insertCard(card) {
@@ -84,6 +84,15 @@ function submitPhotoForm(evt) {
   insertCard(cardAddedByUser);
 }
 
+
+
+
+
+
+
+
+/*
+//  ДЛЯ PopupWithImage.js 
 function handleOpenImage(name, link) {
   // ПЕРЕМЕННЫЕ ФУЛЛСКРИН ПОПАПА
   popupFullImage.src = link;
@@ -92,6 +101,17 @@ function handleOpenImage(name, link) {
   // Закрываем попап
   openPopup(popupFull);
 }
+*/
+
+
+
+
+
+
+
+
+
+
 
 //ОБРАБОТЧИК ОТПРАВКИ ФОРМЫ
 function submitHandlerFormPhoto(evt) {
@@ -117,6 +137,21 @@ const closePopupTarget = (evt) => {
   } 
 };*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//ДЛЯ ЮЗЕРИНФО
 function handleOpenProfilePopup() {
   openPopup(popupUser);
   nameInput.value = profileName.textContent;
@@ -130,6 +165,33 @@ function profileInfoEdit(evt) {
   closePopup(popupUser);
   evt.preventDefault();
 }
+
+*/
+
+
+
+
+
+
+
+
+
+/*
+//ДЛЯ СЕКЦИИ ПОПАП
+
+//ОТКРЫТЬ ПОПАП
+export const openPopup = function (popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupByEsqButton);
+};
+
+//ЗАКРЫТЬ ПОПАП
+const closePopup = function (popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupByEsqButton);
+};
+
+
 
 //ВЫХОД ИЗ ПОПАПА ПО НАЖАТИЮ НА ESC
 function closePopupByEsqButton(evt) {
@@ -151,6 +213,13 @@ popupList.forEach((popup) => {
     }
   });
 });
+*/
+
+
+
+
+
+
 
 function handleOpenAddCardPopup() {
   //formAddCardValidation.updatePopupSubmitButtonState();
