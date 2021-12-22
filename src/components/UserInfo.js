@@ -1,4 +1,4 @@
-export class UserInfo {
+export default class UserInfo {
     constructor({nameSelector, jobSelector}) {
         this._name = nameSelector;
         this._job = jobSelector;
@@ -6,15 +6,15 @@ export class UserInfo {
         this._inputJob = document.querySelector('#user-description-input');   
     }
 
-    setUserInfo(config){
-        this._name.textContent = config.name;
-        this._job.textContent = config.job;
+    setUserInfo(){
+        this._name.textContent = this._inputName.value;
+        this._job.textContent = this._inputJob.value;
         // принимает новые данные пользователя и добавляет на страницу
       }
     getUserInfo(){
         this._inputName.value = this._name.textContent;
         this._inputJob.value = this._job.textContent;
         // получает данные со страницы в переносит в инпут
-      }
+      };
 
 }

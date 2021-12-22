@@ -1,49 +1,8 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 import { initialCards } from "./initCards.js";
 
-//Добавить разметку карточки
-const cardTemplate = document.querySelector("#photos-element").content;
-const cardList = document.querySelector(".photo-grid");
 
-const validationSettings = {
-  formSelector: ".popup__form",
-  inputList: ".popup__input",
-  buttonElement: ".popup__submit",
-  inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
-};
-
-//POPUP
-const popupList = Array.from(document.querySelectorAll(".popup"));
-const popupUser = document.querySelector(".popup-user");
-const popupPhotos = document.querySelector(".popup-photos");
-
-//BATTON OPEN POPUP
-const buttonEdit = document.querySelector(".profile__edit");
-const buttonAdd = document.querySelector(".profile__add-button");
-
-// ПЕРЕМЕННЫЕ ДЛЯ ПРОФИЛЯ
-const userContainer = document.querySelector(".popup-user__container"); // Воспользуйтесь методом querySelector()
-// поля формы в DOM
-const nameInput = document.querySelector(".popup-user__input-name");
-const jobInput = document.querySelector(".popup-user__input_type_job");
-const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector(".profile__job");
-
-// ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
-const photoName = document.querySelector(".popup-photos__input-card-name");
-const photoLink = document.querySelector(".popup-photos__input_type_card-src");
-
-// ПЕРЕМЕННЫЕ ФУЛЛСКРИНА
-export const popupFullImage = document.querySelector(".popup__image");
-export const popupFullFigcaption = document.querySelector(".popup__figcaption");
-
-//ФОРМЫ ПОПАПОВ
-const popupFormProfile = document.querySelector(".popup-user__form");
-const popupFormPhoto = document.querySelector(".popup-photos__form");
-const popupFull = document.querySelector(".popup-fullscreen");
 
 
 
@@ -232,15 +191,36 @@ popupFormProfile.addEventListener("submit", profileInfoEdit);
 popupFormPhoto.addEventListener("submit", submitHandlerFormPhoto);
 buttonAdd.addEventListener("click", handleOpenAddCardPopup);
 
+
+
+
+
+
+
+
+
+import './index.css';
+import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js'
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+
+import {/*........*/} from '../utils/constants.js';
+
+let PopupNewCardValidation = undefined
+
+
 //ОБЬЕКТЫ(ЭКЗЕМПЛЯРЫ) КЛАССА ВАЛИДАЦИИ
 const formProfileValidation = new FormValidator(
-  validationSettings,
-  popupFormProfile
+    validationSettings,
+    popupFormProfile
 );
 formProfileValidation.enableValidation();
 
 const formAddCardValidation = new FormValidator(
-  validationSettings,
-  popupFormPhoto
+    validationSettings,
+    popupFormPhoto
 );
 formAddCardValidation.enableValidation();
