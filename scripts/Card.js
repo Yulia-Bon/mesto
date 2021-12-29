@@ -1,6 +1,6 @@
-//import { openPopup } from "./index.js";
+import Popup  from "./Popup.js";
 
-export class Card {
+export default class Card {
   constructor(name, link, template, handleOpenImage) {
     this._name = name;
     this._link = link;

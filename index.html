@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>место</title>
     <meta name="description" content="интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки"/>
-    <link rel="stylesheet" href="src/pages/index.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="pages">
     <header class="header">
-      <img class="header__logo" src="src/images/logo_w.svg" alt="логотип сайта" />
+      <img class="header__logo" src="./images/logo_w.svg" alt="логотип сайта" />
     </header>
     <main>
       <section class="profile">
-        <img src="src/images/avatar.jpg" alt="Фото в профиле" class="profile__avatar"/>
+        <img src="./images/avatar.jpg" alt="Фото в профиле" class="profile__avatar"/>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Исследователь океана</p>
@@ -47,9 +47,9 @@
     <div tabindex="0"  class="popup__container popup-user__container">
       <form action="#" method="POST" class="popup__form popup-user__form" name="popup-user_info"  novalidate> 
         <h2 class="popup__title popup-user__title">Редактировать профиль</h2>
-        <input required id="user-name-input"  name="you_name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name" minlength="2" maxlength="40"/>
+        <input required id="user-name-input"  name="name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name" minlength="2" maxlength="40"/>
         <span id="user-name-input-error" class="popup__input-error userName-input-error"></span>
-        <input required id="user-description-input" name="you_job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
+        <input required id="user-description-input" name="job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
         <span id="user-description-input-error" class="popup__input-error userAbout-input-error"></span>
         <button disabled class="popup__submit popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
@@ -94,9 +94,14 @@
     </li>
   </template>
 
-  <script type="module" src="src/pages/index.js"></script>
-  <script type="module" src="src/components/Card.js"></script>
-  <script type="module" src="src/components/FormValidator.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/Card.js"></script>
+  <script type="module" src="./scripts/Popup.js"></script>
+ 
+  <script type="module" src="./scripts/PopupWithForm.js"></script>
+  <script type="module" src="./scripts/PopupWithImage.js"></script>
+  <script type="module" src="./scripts/UserInfo.js"></script>
+  <script type="module" src="./scripts/FormValidator.js"></script>
 
   </body>
 </html>
