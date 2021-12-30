@@ -9,8 +9,6 @@ import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 
 
-
-
 //Добавить разметку карточки
 const cardTemplate = document.querySelector("#photos-element").content;
 const cardList = document.querySelector(".photo-grid");
@@ -28,11 +26,6 @@ const validationSettings = {
 const popupList = Array.from(document.querySelectorAll(".popup"));
 const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
-
-
-
-
-
 
 
 
@@ -67,16 +60,6 @@ const popupFull = document.querySelector(".popup-fullscreen");
 
 
 
-
-
-
-const insertValues = (config) => {
-  inputName.value = config.name;
-  inputJob.value = config.about;
-};
-
-
-
 //ОБЬЕКТЫ(ЭКЗЕМПЛЯРЫ) КЛАССА ВАЛИДАЦИИ
 const formProfileValidation = new FormValidator(
   validationSettings,
@@ -104,7 +87,7 @@ function insertCard(card) {
   cardList.prepend(photoCard);
 }
 
-// тут создаете карточку и возвращаете ее а зачем
+
 // тут создаете карточку и возвращаете ее
 function createCard(item) {
   const cards = new Card(item.name, item.link, cardTemplate, handleOpenImage);
@@ -132,36 +115,29 @@ function handleOpenImage(name, link) {
 
 
 
-
-
-//PROFILE
-/** Форма редактирования профиля */
-const profile = new UserInfo('.profile__name', '.profile__job');
-
-//редактор профиля
-const  profileForm = new PopupWithForm(popupUser, (inputValues)=> {
-  profile.setUserInfo(inputValues);
-  });
-  profileForm.setEventListeners();
-
-// Слушатель на кнопке редактора профиля
+// Форма редактирования профиля
+const profile = new UserInfo({nameSelector:profileName, jobSelector:profileJob});
+const profileForm = new PopupWithForm(popupUser, {handleFormSubmit: (inputValues)=>{
+  profile.getUserInfo(inputValues);
+  profileForm.close();
+}});
+ profileForm.setEventListeners();
+/** Обработчик кнопки редактирования профиля */
 buttonEdit.addEventListener('click', () => {
-  const { name, job } = profile.getUserInfo();
-  nameInput.value = name;
-  jobInput.value = job;
-  // editFormValidator.resetValidation();
+  profile.setUserInfo();
   profileForm.open();
 });
+
 
 
 /** Форма добавления новой карточки */
 const addPhotoForm = new PopupWithForm(popupPhotos, {handleFormSubmit: (inputValues) =>{
     insertCard(inputValues);
     addPhotoForm.close();
+    formAddCardValidation.updatePopupSubmitButtonState();
 }});
 addPhotoForm.setEventListeners();
 /**  Обработчик клика по кнопке добавления карточки */
 buttonAdd.addEventListener('click', () => {
-//  formAddPhoto.resetValidation();
   addPhotoForm.open();
 });
