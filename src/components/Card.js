@@ -27,8 +27,6 @@ export default class Card {
 
     //УДАЛИТЬ КАРТОЧКУ
     _deletePhoto() {
-
-        // const cardToDelete = evt.target.closest(".photo-grid__item");
         this._element.remove();
     }
 
