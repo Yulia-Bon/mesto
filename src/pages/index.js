@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 import {
   initialCards,
   popupFull,
@@ -12,7 +12,8 @@ import {
   popupUser,
   validationSettings,
   cardTemplate,
-} from "../components/initCards.js";
+  insertValues
+} from "../components/constants.js";
 
 import Card from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -62,19 +63,18 @@ const cardList = new Section(
 
 // Форма редактирования профиля
 const profile = new UserInfo({
-  nameSelector: profileName,
-  jobSelector: profileJob,
+  nameSelector:profileName, jobSelector:profileJob
 });
 const profileForm = new PopupWithForm(popupUser, {
   handleFormSubmit: (inputValues) => {
-    profile.getUserInfo(inputValues);
+    profile.setUserInfo(inputValues);
     profileForm.close();
   },
 });
 profileForm.setEventListeners();
 /** Обработчик кнопки редактирования профиля */
 buttonEdit.addEventListener("click", () => {
-  profile.setUserInfo();
+  insertValues(profile.getUserInfo());
   profileForm.open();
 });
 
@@ -92,4 +92,4 @@ buttonAdd.addEventListener("click", () => {
   addPhotoForm.open();
 });
 
-cardList.renderItem();
+cardList.renderItems();
