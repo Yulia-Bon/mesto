@@ -2,26 +2,32 @@ const initialCards = [
     {
         name: "Архыз",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+        likes: 10
     },
     {
         name: "Челябинская область",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+        likes: 10
     },
     {
         name: "Иваново",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+        likes: 10
     },
     {
         name: "Камчатка",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+        likes: 1
     },
     {
         name: "Холмогорский район",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+        likes: 108
     },
     {
         name: "Байкал",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+        likes: 54
     },
 ];
 
@@ -68,7 +74,20 @@ const popupFull = document.querySelector(".popup-fullscreen");
 export const popupFullImage = document.querySelector(".popup__image");
 export const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
+
+
+
+ const editProfileButton = document.querySelector('.profile__edit');
+ const avatar = document.querySelector('.profile__avatar');
+const editAvatarForm = document.querySelector('#edit_avatar');
+
+const popupAvatar = document.querySelector('#popup_type_avatar');
+
+
+
+
 export {
     initialCards, popupFull, popupFormPhoto, popupFormProfile, buttonAdd, buttonEdit, photoLink, photoName,
-    profileJob, profileName, popupPhotos, popupUser, validationSettings, cardList, cardTemplate
+    profileJob, profileName, popupPhotos, popupUser, validationSettings, cardList, cardTemplate, editProfileButton, avatar,
+    editAvatarForm, popupAvatar
 };
