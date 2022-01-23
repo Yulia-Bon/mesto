@@ -4,3 +4,9 @@
   border-radius: 10px;
   position: relative;
 }
+
+/* интересно смотрится
+.photo-grid__item:hover {
+  transform: scale(1.05);
+}
+ */

@@ -1,125 +1,87 @@
 export default class Api{
     constructor(options){
-        this._options = options;
-    }
-    
-    getInitialCards(){
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-34/cards', {
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190'
-            }
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
-
-    getProfileInfo(){
-        return fetch('https://nomoreparties.co/v1/cohort-34/users/me', {
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190'
-            }
-        })
-            .then((res) => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
-    setProfileInfo(data){
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-34/users/me', {
-            method: 'PATCH',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.name,
-                about: data.job
-            })
-        })
-            .then((res) => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
-    setNewCard(data){
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-34/cards', {
-            method: 'POST',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.name,
-                link: data.link
-            })
-        })
-            .then((res) => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
-    deleteCard(data){
-        const a = `https://mesto.nomoreparties.co/v1/cohort-34/cards/${data._id}`
-        return fetch(a,{
-            method: 'DELETE',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'application/json'
-            }
-        })
-    }
-    setLike(data){
-        const a = `https://mesto.nomoreparties.co/v1/cohort-34/cards/likes/${data._id}`
-        return fetch(a, {
-            method: 'PUT',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'multipart/form-data'
-            }
+        this._headers = options.headers;
+        this._baseUrl = options.baseUrl;
+        this._handleReturnPromise = ((res) => {
+          if(res.ok){
+            return res.json();
+          }
+          return Promise.reject(`Произошла ошибка: ${res.status} :(`);
         });
     }
-    deleteLIke(data){
-        const a = `https://mesto.nomoreparties.co/v1/cohort-34/cards/likes/${cardId}`
-        return fetch(a, {
-            method: 'DELETE',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then((res) => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
-    changeAvatar(data){
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-34/users/me/avatar', {
-            method: 'PATCH',
-            headers: {
-                authorization: 'df21cdb1-cdd7-4792-acbf-9af5bc5a6190',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                avatar: data.avatar
-            })
-        })
-            .then((res) => {
-                if(res.ok){
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            });
-    }
+    
+    /**Cards */
+  getInitialCards(){
+    return fetch(`${this._baseUrl}/cards`, {
+    headers: this._headers
+  })
+  .then((res) => this._handleReturnPromise(res));
+  }
+
+  setNewCard(data){
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
+
+  deleteCard(cardId){
+    return fetch(`${this._baseUrl}/cards/${cardId}`,{
+      method: 'DELETE',
+      headers: this._headers
+    })
+  }
+
+   /**likes */
+  setLike(cardId){
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
+  deleteLIke(cardId){
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
+
+  //**Profile */
+  getProfileInfo(){
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
+
+  setProfileInfo(data){
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
+
+  /**Avatar */
+  changeAvatar(data){
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+       avatar: data.avatar
+      })
+    })
+    .then((res) => this._handleReturnPromise(res));
+  }
 }

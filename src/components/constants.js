@@ -32,10 +32,10 @@ const initialCards = [
 ];
 
 const inputName = document.querySelector(".popup-user__input-name");
-const inputJob = document.querySelector(".popup-user__input_type_job");
+const inputAbout = document.querySelector(".popup-user__input_type_job");
 export const insertValues = (config) => {
     inputName.value = config.name;
-    inputJob.value = config.job;
+    inputAbout.value = config.about;
 };
 
 //Добавить разметку карточки
@@ -55,7 +55,7 @@ const popupUser = document.querySelector(".popup-user");
 const popupPhotos = document.querySelector(".popup-photos");
 
 const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector(".profile__job");
+const profileAbout = document.querySelector(".profile__job");
 
 // ПЕРЕМЕННЫЕ ГАЛЕРЕИИ
 const photoName = document.querySelector(".popup-photos__input-card-name");
@@ -88,6 +88,6 @@ const popupAvatar = document.querySelector('#popup_type_avatar');
 
 export {
     initialCards, popupFull, popupFormPhoto, popupFormProfile, buttonAdd, buttonEdit, photoLink, photoName,
-    profileJob, profileName, popupPhotos, popupUser, validationSettings, cardList, cardTemplate, editProfileButton, avatar,
+    profileAbout, profileName, popupPhotos, popupUser, validationSettings, cardList, cardTemplate, editProfileButton, avatar,
     editAvatarForm, popupAvatar
 };

@@ -13,7 +13,7 @@
     </header>
     <main>
       <section class="profile">
-        <div class="profile__avatar"><div class="profile__overlay"></div></div>
+        <div class="profile__avatar"><div class="profile__edit-avatar"></div></div>
         <div class="profile__info">
     
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -51,7 +51,7 @@
         <h2 class="popup__title popup-user__title">Редактировать профиль</h2>
         <input required id="user-name-input"  name="name" type="text" value="" placeholder="Ваше имя" class="popup__input popup-user__input-name" minlength="2" maxlength="40"/>
         <span id="user-name-input-error" class="popup__input-error userName-input-error"></span>
-        <input required id="user-description-input" name="job" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
+        <input required id="user-description-input" name="about" type="text" value="" placeholder="Чем занимаетесь?" class="popup__input popup-user__input popup-user__input_type_job" minlength="2" maxlength="200" />
         <span id="user-description-input-error" class="popup__input-error userAbout-input-error"></span>
         <button disabled class="popup__submit popup-user__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
         <button type="button" class="popup__close popup-user__close" aria-label="Кнопка закрытия окна редактирования"></button>
@@ -93,8 +93,8 @@
         <form class="popup__form popup-avatar__form" name="editAvatar" id="edit_avatar">
           <h2 class="popup__title popup-avatar__title">Обновить аватар</h2>
 
-          <input id="avatar" type="url" class="popup__input popup-avatar__input" placeholder="Ссылка на фото" name="avatar" required>
-          <span id="avatar__error" class="popup__input-error placeUrl-input-error"></span>
+          <input required id="avatar" type="url" class="popup__input popup-avatar__input" value="" placeholder="Ссылка на фото" name="avatar">
+          <span id="avatar-error" class="popup__input_type_error popup__input-error placeUrl-input-error"></span>
           <button disabled class="popup__submit popup-avatar__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
           <button type="button" class="popup__close popup-photos__close" aria-label="Кнопка закрытия окна редактирования"></button>
         </form>
@@ -110,10 +110,10 @@
     <section class="popup popup-delete-card" id="popup_type_check">
       <div tabindex="0"  class="popup__container popup-delete__container">
         <form class="popup__form popup-delete__form">
-          <h2 class="popup__title popup-delete__title">Удалит?</h2>
+          <h2 class="popup__title popup-delete__title">Удалить?</h2>
 
-          <button disabled class="popup__button-check popup-check__submit" type="submit" id="delete-button">Да</button>
-          <button type="button" class="popup__close popup-delete__close" aria-label="Кнопка закрытия окна" id="button_close_ask"></button>
+          <button disabled class="popup__submit popup__button-check popup-check__submit" type="submit" aria-label="Кнопка да">Да</button>
+          <button type="button" class="popup__close popup-delete__close" aria-label="Кнопка закрытия окна"></button>
         </form>
       </div>
     </section>
