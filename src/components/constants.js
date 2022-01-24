@@ -74,7 +74,7 @@ const popupFull = document.querySelector(".popup-fullscreen");
 export const popupFullImage = document.querySelector(".popup__image");
 export const popupFullFigcaption = document.querySelector(".popup__figcaption");
 
-
+const popupDelete = document.querySelector('#popup_type_check');
 
 
  const editProfileButton = document.querySelector('.profile__edit');
@@ -84,10 +84,12 @@ const editAvatarForm = document.querySelector('#edit_avatar');
 const popupAvatar = document.querySelector('#popup_type_avatar');
 
 
+const editAvatarButton = document.querySelector('.profile__edit-avatar');
+
 
 
 export {
     initialCards, popupFull, popupFormPhoto, popupFormProfile, buttonAdd, buttonEdit, photoLink, photoName,
     profileAbout, profileName, popupPhotos, popupUser, validationSettings, cardList, cardTemplate, editProfileButton, avatar,
-    editAvatarForm, popupAvatar
+    editAvatarForm, popupAvatar, editAvatarButton, popupDelete
 };

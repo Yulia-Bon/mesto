@@ -16,7 +16,9 @@ import {
   avatar,
   editAvatarForm,
   insertValues,
-  popupAvatar
+  popupAvatar,
+    editAvatarButton,
+    popupDelete
 } from "../components/constants.js";
 
 import Card from "../components/Card.js";
@@ -117,9 +119,9 @@ const popupImage = new PopupWithImage(popupFull);
 popupImage.setEventListeners();
 
 //УДАЛЕНИЕ КАРТОЧКИ
-const popupDelete = document.querySelector('#popup_type_check');
-const popupDeleteImage = new PopupWithConfirmation(popupDelete,
-    (id, element) => {
+
+const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
+    handleSubmitDelete: (id, element) => {
         api.deleteCard(id)
             .then(() => {
                 element.remove();
@@ -130,7 +132,7 @@ const popupDeleteImage = new PopupWithConfirmation(popupDelete,
                 console.log(err);
             });
     }
-);
+});
 
 popupDeleteImage.setEventListeners()
 
@@ -199,7 +201,7 @@ buttonEdit.addEventListener("click", () => {
 const avatarForm = new PopupWithForm(popupAvatar, {handleFormSubmit: (inputValues) => {
   api.changeAvatar(inputValues)
   .then((res) => {
-    profile.setUserInfo({avatar: res.avatar, name: res.name, about: res.about});;
+    profile.setUserInfo({name: res.name, about: res.about, avatar: res.avatar});;
     avatarForm.close();
   })
   .catch((err) => {
@@ -211,7 +213,7 @@ const avatarForm = new PopupWithForm(popupAvatar, {handleFormSubmit: (inputValue
 }});
 avatarForm.setEventListeners();
 // Обработчик изменения аватара
-avatar.addEventListener('click', () => {
+editAvatarButton.addEventListener('click', () => {
   avatarForm.open();
   formEditAvatar.updatePopupSubmitButtonState();
 });
