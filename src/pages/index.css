@@ -45,7 +45,7 @@
 @import url(../bloсks/popup/__submit/_inactive/popup__submit_inactive.css);
 @import url(../bloсks/popup/__input-error/popup__input-error.css);
 @import url(../bloсks/popup/__input-error/_active/popup__input-error_active.css);
-@import url(../bloсks/popup/__input/_type/popup__input_type-error.css);
+@import url(../bloсks/popup/__input/__input-error-line/__input-error-line.css);
 @import url(../bloсks/popup/__button-check/popup__button-check.css);
 @import url(../bloсks/photo-grid/__like-numbers/photo-grid__like-numbers.css);
 
