@@ -13,9 +13,6 @@
     </header>
     <main>
       <section class="profile">
-
-
-
         <div class="profile__edit-avatar"></div>
         <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
         <div class="profile__info">
@@ -92,7 +89,6 @@
       <div class="popup__container popup-avatar__container">
         <form class="popup__form popup-avatar__form" name="editAvatar" id="edit_avatar">
           <h2 class="popup__title popup-avatar__title">Обновить аватар</h2>
-
           <input required id="avatar" type="url" class="popup__input popup-avatar__input" value="" placeholder="Ссылка на фото" name="avatar">
           <span id="avatar-error" class="popup__input_type_error popup__input-error placeUrl-input-error"></span>
           <button disabled class="popup__submit popup-avatar__submit popup-photos__submit" type="submit" aria-label="Кнопка Сохранить">Сохранить</button>
@@ -106,15 +102,12 @@
     <section class="popup popup-delete-card" id="popup_type_check">
       <div tabindex="0"  class="popup__container popup-delete__container">
         <form class="popup__form popup-delete__form">
-          <h2 class="popup__title popup-delete__title">Удалить?</h2>
-          <button disabled id="delete-button" class="popup__button popup__button_el_check popup__submit popup__button-check popup-check__submit" type="submit" aria-label="Кнопка да">Да</button>
+          <h2 class="popup__title popup-delete__title">Вы уверены?</h2>
+          <button id="delete-button" class="popup__button popup__submit" type="submit" aria-label="Кнопка да">Да</button>
           <button type="button" class="popup__close popup-delete__close" aria-label="Кнопка закрытия окна"></button>
         </form>
       </div>
     </section>
-
-
-
 
 
 <!--TEMPLATE КАРТОЧКИ-->
@@ -130,9 +123,6 @@
       </div></div>
     </li>
   </template>
-
-
-
 
   </body>
 </html>

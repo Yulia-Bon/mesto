@@ -56,9 +56,10 @@ module.exports = {
         }),
         new MiniCssExtractPlugin(),
        // new CleanWebpackPlugin(),
-    ]
+    ],
+    devtool: 'source-map'
     }
-
+    
 // переписали точку выхода, используя утилиту path
 
 // module.exports — это синтаксис экспорта в Node.js
