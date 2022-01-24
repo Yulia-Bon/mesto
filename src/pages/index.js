@@ -66,7 +66,6 @@ const formAddCardValidation = new FormValidator(
   popupFormPhoto);
 formAddCardValidation.enableValidation();
 
-//именно в этом попапе ошибка
 const formEditAvatar = new FormValidator(
     validationSettings,
     editAvatarForm);
@@ -109,7 +108,7 @@ const createCopyCard = (data) => {
   return card.generateCard()
 };
 
-//СОЗДАНИЕ ГАЛЕРЕИ ИЗ КАРТОЧКИ
+//СОЗДАНИЕ ГАЛЕРЕИ ИЗ КАРТОЧЕК
 const sectionCards = new Section({renderer: (item) => {
   sectionCards.addItem(createCopyCard(item));
 }}, '.photo-grid');
@@ -119,7 +118,6 @@ const popupImage = new PopupWithImage(popupFull);
 popupImage.setEventListeners();
 
 //УДАЛЕНИЕ КАРТОЧКИ
-
 const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
     handleSubmitDelete: (id, element) => {
         api.deleteCard(id)
@@ -156,7 +154,6 @@ addFhotoForm.setEventListeners();
 //  Обработчик клика по кнопке добавления карточки
 buttonAdd.addEventListener('click', () => {
     formAddCardValidation.updatePopupSubmitButtonState();
-    // addFhotoForm.enableValidation();
     addFhotoForm.open();
 });
 
@@ -188,7 +185,7 @@ const profileForm = new PopupWithForm(popupUser, {
 
 profileForm.setEventListeners();
 
-/** Обработчик кнопки редактирования профиля */
+//Обработчик кнопки редактирования профиля
 buttonEdit.addEventListener("click", () => {
   insertValues(profile.getUserInfo());
   profileForm.open();

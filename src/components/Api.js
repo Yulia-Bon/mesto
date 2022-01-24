@@ -10,7 +10,7 @@ export default class Api{
         });
     }
     
-    /**Cards */
+    //Cards
   getInitialCards(){
     return fetch(`${this._baseUrl}/cards`, {
     headers: this._headers
@@ -37,7 +37,7 @@ export default class Api{
     })
   }
 
-   /**likes */
+   //likes
   setLike(cardId){
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT',
@@ -53,7 +53,7 @@ export default class Api{
     .then((res) => this._handleReturnPromise(res));
   }
 
-  //**Profile */
+  //Profile
   getProfileInfo(){
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
@@ -73,7 +73,7 @@ export default class Api{
     .then((res) => this._handleReturnPromise(res));
   }
 
-  /**Avatar */
+  //Avatar
   changeAvatar(data){
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
