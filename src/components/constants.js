@@ -10,7 +10,7 @@ const validationSettings = {
   inputList: ".popup__input",
   buttonElement: ".popup__submit",
   inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_type_error",
+  inputErrorClass: "popup__input_type-error",
   errorClass: "popup__input-error_active",
 };
 
