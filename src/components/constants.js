@@ -7,11 +7,19 @@ export const insertValues = (config) => {
 
 const validationSettings = {
   formSelector: ".popup__form",
-  inputList: ".popup__input",
-  buttonElement: ".popup__submit",
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+
+
   inactiveButtonClass: "popup__submit_inactive",
   inputErrorClass: "popup__input-error-line",
   errorClass: "popup__input-error_active",
+
+
+
+
+
+
 };
 
 const popupUser = document.querySelector(".popup-user");

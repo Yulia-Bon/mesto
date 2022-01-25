@@ -74,7 +74,7 @@ const createCopyCard = (data) => {
       },
       handleRemoveCard: (id, element) => {
         popupDeleteImage.open();
-        popupDeleteImage.getCard(id, element);
+        popupDeleteImage.setCard(id, element);
       },
       handleLike: {
         handleSetLike: (id) => {
@@ -118,23 +118,11 @@ const sectionCards = new Section(
 const popupImage = new PopupWithImage(popupFull);
 popupImage.setEventListeners();
 
-//УДАЛЕНИЕ КАРТОЧКИ
-const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
-  handleSubmitDelete: (id, element) => {
-    api
-      .deleteCard(id)
-      .then(() => {
-        element.remove();
-        element = "";
-        popupDeleteImage.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-});
 
-popupDeleteImage.setEventListeners();
+
+
+
+
 
 //РАБОТА С КАРТОЧКАМИ. ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
 // Форма добавления новой карточки
@@ -155,6 +143,32 @@ const addFhotoForm = new PopupWithForm(popupPhotos, {
   },
 });
 addFhotoForm.setEventListeners();
+
+
+
+
+
+//УДАЛЕНИЕ КАРТОЧКИ
+const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
+    handleSubmitDelete: (id, card) => {
+
+        api
+            .deleteCard(id)
+            .then(() => {
+                card.removeCard()//   вот здесь нужно вызвать метод
+                popupDeleteImage.close();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+         },
+});
+
+popupDeleteImage.setEventListeners();
+
+
+
+
 
 //  Обработчик клика по кнопке добавления карточки
 buttonAdd.addEventListener("click", () => {

@@ -64,6 +64,12 @@ export default class Card {
     }
   }
 
+
+  removeCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
   //слушатели
   _setEventListeners() {
     this._elementLike.addEventListener("click", () => {
@@ -74,7 +80,7 @@ export default class Card {
       }
     });
     this._deleteButton.addEventListener("click", () => {
-      this._handleRemoveCard(this._id, this._element);
+      this._handleRemoveCard(this._id, this);
     });
     this._element
       .querySelector(".photo-grid__pic")

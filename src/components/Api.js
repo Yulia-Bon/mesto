@@ -2,13 +2,14 @@ export default class Api {
   constructor(options) {
     this._headers = options.headers;
     this._baseUrl = options.baseUrl;
-    this._handleReturnPromise = (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Произошла ошибка: ${res.status} :(`);
-    };
   }
+
+  _handleReturnPromise(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Произошла ошибка: ${res.status} => (`);
+  };
 
   //Cards
   getInitialCards() {
@@ -32,7 +33,8 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    });
+    })
+        .then((res) => this._handleReturnPromise(res));
   }
 
   //likes

@@ -2,13 +2,13 @@
 export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
-    this._formSelector = config.formSelector;
-    this._inputList = config.inputList;
-    this._buttonElement = config.buttonElement;
-    this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+
+
   }
 
   _getErrorElement(inputElement) {
@@ -52,15 +52,11 @@ export class FormValidator {
 
   // функция для установки слушателей проверки на валидность инпутов
   _setEventListeners() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputList)
-    );
-    const buttonElement = this._formElement.querySelector(this._buttonElement);
-    this._updateButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
+    this._updateButtonState(this._inputList, this._buttonElement);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._updateButtonState(inputList, buttonElement);
+        this._updateButtonState(this._inputList, this._buttonElement);
       });
     });
     this._formElement.addEventListener("submit", (evt) => {
@@ -70,11 +66,7 @@ export class FormValidator {
 
   //ИПОЛЬЗУЕТСЯ В SCRIPT.JS ДЛЯ ОБНОВЛЕНИЯ СОСТОЯНИИ КНОПКИ САБМИТ
   updatePopupSubmitButtonState() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputList)
-    );
-    const buttonElement = this._formElement.querySelector(this._buttonElement);
-    this._updateButtonState(inputList, buttonElement);
+    this._updateButtonState(this._inputList, this._buttonElement);
   }
 
   _updateButtonState(inputList, buttonElement) {
