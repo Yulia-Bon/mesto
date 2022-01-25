@@ -73,8 +73,8 @@ const createCopyCard = (data) => {
         popupImage.open({ name: data.name, link: data.link });
       },
       handleRemoveCard: (id, element) => {
-        popupDeleteImage.open();
         popupDeleteImage.setCard(id, element);
+        popupDeleteImage.open();
       },
       handleLike: {
         handleSetLike: (id) => {
@@ -155,7 +155,7 @@ const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
         api
             .deleteCard(id)
             .then(() => {
-                card.removeCard()//   вот здесь нужно вызвать метод
+                card.removeCard();
                 popupDeleteImage.close();
             })
             .catch((err) => {
