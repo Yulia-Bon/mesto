@@ -6,7 +6,7 @@
 .header{align-items:flex-start;border-bottom:1px solid rgba(84,84,84,.7);display:flex;justify-content:flex-start;margin:0 auto;max-width:880px;padding-bottom:40px;padding-top:45px}@media screen and (max-width:1023px){.header{margin:0 89px;max-width:842px}}@media screen and (max-width:767px){.header{margin:0 43px;max-width:682px;padding-top:35px}}@media screen and (max-width:424px){.header{margin:0 22px;max-width:382px}}@media screen and (max-width:374px){.header{margin:0 auto;max-width:320px;padding-bottom:30px;padding-top:28px}}
 .header__logo{max-width:142px}@media screen and (max-width:374px){.header__logo{margin-left:27px;max-width:104px}}
 .photo-grid{display:grid;gap:20px 17px;grid-template-columns:repeat(3,282px);justify-content:center;list-style:none;margin:48px 0 0;padding:0}@media screen and (max-width:900px){.photo-grid{grid-template-columns:repeat(2,calc(50% - 8.5px));margin:36px 30px auto}}@media screen and (max-width:600px){.photo-grid{grid-template-columns:minmax(282px,1fr);margin:36px 19px auto}}
-.photo-grid__pic{border-top-left-radius:10px;border-top-right-radius:10px;height:279px;-o-object-fit:cover;object-fit:cover;width:100%}.photo-grid__pic:hover{cursor:pointer}
+.photo-grid__pic{border-top-left-radius:10px;border-top-right-radius:10px;max-height:280px;min-height:279px;-o-object-fit:cover;object-fit:cover;width:100%}.photo-grid__pic:hover{cursor:pointer}
 .photo-grid__item{background-color:#fff;border-radius:10px;color:#000;position:relative}
 .photo-grid__title{font-size:24px;font-weight:900;line-height:29px;margin:25px 21px;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .photo-grid__item-description{align-items:center;display:flex;justify-content:space-between}
@@ -36,7 +36,7 @@
 .popup__submit_inactive{background-color:#fff;border:1px solid #c4c4c4;border-radius:2px;color:#c4c4c4}.popup__submit_inactive:hover{background-color:transparent}
 .popup__input-error{display:none}
 .popup__input-error_active{color:red;display:block;line-height:1.5}
-.popup__input_type_error{border-bottom:1px solid red}
+popup__input-error-line{border-bottom:1px solid red}
 .popup__button-check{margin-top:0}
 .photo-grid__like-numbers{align-items:center;color:#000;display:flex;flex-direction:column;font-size:13px;font-style:normal;font-weight:400;line-height:16px;margin-top:3px;padding:0;text-align:center;width:25px}
 
