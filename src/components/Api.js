@@ -33,8 +33,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-        .then((res) => this._handleReturnPromise(res));
+    }).then((res) => this._handleReturnPromise(res));
   }
 
   //likes
