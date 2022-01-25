@@ -72,9 +72,9 @@ const createCopyCard = (data) => {
       handleOpenImage: () => {
         popupImage.open({ name: data.name, link: data.link });
       },
-      handleRemoveCard: (id, element) => {
-        popupDeleteImage.setCard(id, element);
+      handleRemoveCard: (id, card) => {
         popupDeleteImage.open();
+        popupDeleteImage.getCard(id, card);
       },
       handleLike: {
         handleSetLike: (id) => {
@@ -119,11 +119,6 @@ const popupImage = new PopupWithImage(popupFull);
 popupImage.setEventListeners();
 
 
-
-
-
-
-
 //РАБОТА С КАРТОЧКАМИ. ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ
 // Форма добавления новой карточки
 const addFhotoForm = new PopupWithForm(popupPhotos, {
@@ -145,23 +140,19 @@ const addFhotoForm = new PopupWithForm(popupPhotos, {
 addFhotoForm.setEventListeners();
 
 
-
-
-
 //УДАЛЕНИЕ КАРТОЧКИ
 const popupDeleteImage = new PopupWithConfirmation(popupDelete, {
-    handleSubmitDelete: (id, card) => {
-
-        api
-            .deleteCard(id)
-            .then(() => {
-                card.removeCard();
-                popupDeleteImage.close();
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-         },
+  handleSubmitDelete: (id, card) => {
+    api
+      .deleteCard(id)
+      .then(() => {
+        card.removeCard()//   вот здесь нужно вызвать метод
+        popupDeleteImage.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 });
 
 popupDeleteImage.setEventListeners();

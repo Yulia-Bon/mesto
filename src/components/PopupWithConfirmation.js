@@ -15,7 +15,7 @@ export default class PopupWithConfirmation extends Popup {
     });
   }
 
-  setCard(id, card) {
+  getCard(id, card) {
     this._clear();
     this._idCard = id;
     this._card = card;
